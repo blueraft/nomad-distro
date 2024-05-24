@@ -1,0 +1,26 @@
+[project]
+classifiers = [
+  "Intended Audience :: Developers",
+  "Operating System :: OS Independent",
+  "Programming Language :: Python",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+]
+name = "nomad-distribution"
+description = "nomad distribution template"
+version = "0.1"
+readme = "README.md"
+requires-python = ">=3.9"
+license = { file = "LICENSE" }
+dependencies = ["nomad-lab[infrastructure, parsing]>=1.2.2dev578"]
+
+[project.optional-dependencies]
+plugins = [
+  "nomad-sintering @ git+https://github.com/hampusnasstrom/nomad-sintering.git",
+  "pybis @ git+https://github.com/FAIRmat-NFDI/fairmat-pybis.git@91039c2a1df364c88ab7e284b59c43ec42f18370",
+]
+dev = ["pytest"]
+
+[tool.uv.pip]
+index-url = "https://gitlab.mpcdf.mpg.de/api/v4/projects/2187/packages/pypi/simple"
