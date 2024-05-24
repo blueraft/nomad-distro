@@ -36,6 +36,14 @@ RUN apt-get install -y curl git
 ADD --chmod=755 https://astral.sh/uv/install.sh /install.sh
 RUN /install.sh && rm /install.sh
 
+RUN git clone -n --depth=1 --filter=tree:0 \
+  https://gitlab.mpcdf.mpg.de/nomad-lab/nomad-FAIR.git \
+&& cd nomad-FAIR \
+&& git sparse-checkout set --no-cone examples \
+&& git checkout \
+&& cp -r examples /app \
+&& cd /app
+
 # Download dependencies as a separate step to take advantage of Docker's caching.
 # Leverage a cache mount to /root/.cache/uv to speed up subsequent builds.
 # Leverage a bind mount to requirements to avoid having to copy them into
