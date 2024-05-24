@@ -29,8 +29,18 @@ RUN adduser \
     --uid "${UID}" \
     nomad
 
-RUN apt-get update
-RUN apt-get install -y curl git
+RUN apt-get update \
+ && apt-get install --yes --quiet --no-install-recommends \
+      libgomp1 \
+      libmagic1 \
+      file \
+      gcc \
+      build-essential \
+      curl \
+      zip \
+      unzip \
+      git \
+ && rm -rf /var/lib/apt/lists/*
 
 # Install UV
 ADD --chmod=755 https://astral.sh/uv/install.sh /install.sh

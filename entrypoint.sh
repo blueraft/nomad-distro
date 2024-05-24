@@ -1,1 +1,3 @@
-python -m 'nomad.cli' admin run app
+#!/bin/bash
+
+python -m nomad.cli admin run app
