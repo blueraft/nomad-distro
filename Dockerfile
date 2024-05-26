@@ -5,14 +5,21 @@
 # https://docs.docker.com/engine/reference/builder/
 
 ARG PYTHON_VERSION=3.9
+
 FROM python:${PYTHON_VERSION}-slim as base
+
+# Keeps Python from buffering stdout and stderr to avoid situations where
+# the application crashes without emitting any logs due to buffering.
+ENV PYTHONUNBUFFERED 1
+ENV PYTHONPATH "${PYTHONPATH}:/backend/"
+ENV VIRTUAL_ENV=/opt/venv \
+    PATH="/opt/venv/bin:$PATH"
+
+FROM base AS builder
 
 # Prevents Python from writing pyc files.
 ENV PYTHONDONTWRITEBYTECODE=1
 
-# Keeps Python from buffering stdout and stderr to avoid situations where
-# the application crashes without emitting any logs due to buffering.
-ENV PYTHONUNBUFFERED=1
 ENV RUNTIME docker
 
 WORKDIR /app
@@ -61,15 +68,22 @@ RUN git clone -n --depth=1 --filter=tree:0 \
 RUN --mount=type=cache,target=/root/.cache/uv \
     --mount=type=bind,source=requirements.txt,target=requirements.txt \
     --mount=type=bind,source=pyproject.toml,target=pyproject.toml \
-    /root/.cargo/bin/uv pip install --system -r requirements.txt
+    /root/.cargo/bin/uv venv /opt/venv && /root/.cargo/bin/uv pip install -r requirements.txt
 
-# Install some executables
-RUN apt-get update \
-    && apt-get install -y curl procps sysstat ifstat \
-    && rm -rf /var/lib/apt/lists/*
+# Final stage to create the runnable image with minimal size
+FROM python:${PYTHON_VERSION}-slim-bookworm as final
 
-# Copy the source code into the container.
+WORKDIR /app
+
+COPY --from=builder /opt/venv /opt/venv
+COPY --from=builder /app/examples examples
+
 COPY entrypoint.sh .
+
+# Activate the virtualenv in the container
+# See here for more information:
+# https://pythonspeed.com/articles/multi-stage-docker-python/
+ENV PATH="/opt/venv/bin:$PATH"
 
 # Run the application.
 ENTRYPOINT ["/app/entrypoint.sh"]
