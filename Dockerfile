@@ -69,7 +69,7 @@ COPY packages packages
 RUN --mount=type=cache,target=/root/.cache/uv \
     --mount=type=bind,source=requirements.txt,target=requirements.txt \
     --mount=type=bind,source=pyproject.toml,target=pyproject.toml \
-    /root/.cargo/bin/uv venv /opt/venv && /root/.cargo/bin/uv pip install -r requirements.txt
+    /root/.cargo/bin/uv venv /opt/venv && pip install -r requirements.txt --index-url "https://gitlab.mpcdf.mpg.de/api/v4/projects/2187/packages/pypi/simple"
 
 # Final stage to create the runnable image with minimal size
 FROM python:${PYTHON_VERSION}-slim-bookworm as final
