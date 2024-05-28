@@ -61,6 +61,7 @@ RUN git clone -n --depth=1 --filter=tree:0 \
 && cp -r examples /app \
 && cd /app
 
+COPY packages packages
 # Download dependencies as a separate step to take advantage of Docker's caching.
 # Leverage a cache mount to /root/.cache/uv to speed up subsequent builds.
 # Leverage a bind mount to requirements to avoid having to copy them into
