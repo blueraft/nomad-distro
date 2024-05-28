@@ -1,0 +1,22 @@
+FROM node:20 AS builder
+
+WORKDIR /app
+
+COPY gui/package*.json ./
+
+RUN npm install
+
+COPY gui .
+
+RUN npm run build -- --base /prod/v2/gui
+
+FROM nginx
+
+# Copy the built webapp from the /build directory to the nginx default directory
+RUN mkdir -p /usr/share/nginx/html/prod/v2/gui
+COPY --from=builder /app/build /usr/share/nginx/html/prod/v2/gui
+
+# Add nginx configuration to redirect to index.html
+COPY gui/nginx.conf /etc/nginx/conf.d/default.conf
+
+CMD ["nginx", "-g", "daemon off;"]

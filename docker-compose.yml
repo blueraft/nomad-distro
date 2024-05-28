@@ -117,6 +117,14 @@ services:
       timeout: 10s
       retries: 30
       start_period: 10s
+        
+  gui:
+    restart: unless-stopped
+    build:
+      context: .
+      dockerfile: Dockerfile.gui
+    platform: linux/amd64
+    container_name: nomad_distro_gui
  
   # nomad proxy (a reverse proxy for nomad)
   proxy:
