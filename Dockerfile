@@ -75,6 +75,15 @@ FROM python:${PYTHON_VERSION}-slim-bookworm as final
 
 WORKDIR /app
 
+RUN apt-get update \
+ && apt-get install --yes --quiet --no-install-recommends \
+       libgomp1 \
+       libmagic1 \
+       curl \
+       zip \
+       unzip \
+ && rm -rf /var/lib/apt/lists/*
+ 
 COPY --from=builder /opt/venv /opt/venv
 COPY --from=builder /app/examples examples
 
