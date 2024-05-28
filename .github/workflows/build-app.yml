@@ -20,8 +20,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-        with:
-          submodules: recursive
+      - name: Sync submodules
+        run: |
+          git submodule set-url -- gui https://oauth2:${{ secrets.GITLAB_TOKEN }}@gitlab.mpcdf.mpg.de/nomad-lab/nomad-gui
+          git submodule sync --recursive
+          git submodule update --init --recursive --jobs=4
 
       - uses: docker/setup-buildx-action@v3
 
