@@ -346,7 +346,9 @@ lxml==5.2.2
     #   lxml-html-clean
     #   nomad-lab
 lxml-html-clean==0.1.1
-    # via nomad-lab
+    # via
+    #   nomad-lab
+    #   perovskite-solar-cell-database
 m2r==0.2.1
     # via nomad-lab
 mako==1.3.5
@@ -520,7 +522,9 @@ oauthenticator==15.1.0
 oauthlib==3.2.2
     # via jupyterhub
 openpyxl==3.1.2
-    # via nomad-lab
+    # via
+    #   nomad-lab
+    #   perovskite-solar-cell-database
 optimade==0.22.1
     # via nomad-lab
 orix==0.12.1.post0
@@ -573,6 +577,8 @@ parso==0.8.4
     # via jedi
 partd==1.4.2
     # via dask
+perovskite-solar-cell-database @ file://${PWD}/packages/perovskite-solar-cell-database
+    # via nomad-distribution (pyproject.toml)
 pexpect==4.9.0
     # via ipython
 phonopy==2.23.1
@@ -745,7 +751,9 @@ radioactivedecay==0.5.0
 rdflib==5.0.0
     # via nomad-lab
 rdkit==2023.9.5
-    # via nomad-lab
+    # via
+    #   nomad-lab
+    #   perovskite-solar-cell-database
 recommonmark==0.7.1
     # via nomad-lab
 requests==2.32.2
