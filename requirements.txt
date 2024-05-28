@@ -577,7 +577,7 @@ parso==0.8.4
     # via jedi
 partd==1.4.2
     # via dask
-perovskite-solar-cell-database @ file:///${PROJECT_ROOT}/packages/perovskite-solar-cell-database
+perovskite-solar-cell-database @ file://${PWD}/packages/perovskite-solar-cell-database
     # via nomad-distribution (pyproject.toml)
 pexpect==4.9.0
     # via ipython

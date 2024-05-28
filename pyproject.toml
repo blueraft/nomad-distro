@@ -19,7 +19,7 @@ dependencies = ["nomad-lab[infrastructure, parsing]>=1.2.2dev578"]
 plugins = [
   "nomad-sintering @ git+https://github.com/hampusnasstrom/nomad-sintering.git",
   "pybis @ git+https://github.com/FAIRmat-NFDI/fairmat-pybis.git@91039c2a1df364c88ab7e284b59c43ec42f18370",
-  "perovskite-solar-cell-database @ file:///${PROJECT_ROOT}/packages/perovskite-solar-cell-database",
+  "perovskite-solar-cell-database @ file://${PWD}/packages/perovskite-solar-cell-database",
 ]
 dev = ["pytest"]
 
