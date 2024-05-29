@@ -16,7 +16,7 @@ install:
 # Target to update submodules and sync Python and Node packages
 sync:
 	git submodule update --init --recursive
-	uv pip install -e ".[dev, plugins]" -c requirements.txt -p $(VENV_DIR)/bin/python
+	uv pip e ".[dev, plugins]" -c requirements.txt -p $(VENV_DIR)/bin/python
 	npm install --prefix gui
 
 # Lock python dependencies
