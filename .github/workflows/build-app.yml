@@ -16,6 +16,7 @@ env:
 
 jobs:
   docker-publish:
+    permissions: write-all
     name: Build Docker image
     runs-on: ubuntu-latest
     steps:
