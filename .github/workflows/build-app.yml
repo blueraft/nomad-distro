@@ -12,13 +12,20 @@ on:
 
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME: ${{ github.repository }}
 
 jobs:
   docker-publish:
     permissions: write-all
     name: Build Docker image
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        include:
+          - dockerfile: Dockerfile
+            image_name: ${{ github.repository }}-api
+          - dockerfile: Dockerfile.gui
+            image_name: ${{ github.repository }}-gui
+
     steps:
       - uses: actions/checkout@v4
       - name: Sync submodules
@@ -39,7 +46,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v5
         with:
-          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+          images: ${{ env.REGISTRY }}/${{ matrix.image_name }}
 
       - name: "Build and push Docker image"
         uses: docker/build-push-action@v5
@@ -47,6 +54,7 @@ jobs:
           context: .
           # Reuse the builder
           cache-from: type=gha
+          file: ${{ matrix.dockerfile }}
           cache-to: type=gha,mode=max
           push: ${{ github.event_name != 'pull_request' }}
           tags: ${{ steps.meta.outputs.tags }}
