@@ -4,7 +4,8 @@ WORKDIR /app
 
 COPY gui/package*.json ./
 
-RUN npm install
+RUN --mount=type=cache,target=/app/npm/cache \
+    npm install --cache /app/npm/cache --loglevel error
 
 COPY gui .
 
