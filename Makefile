@@ -24,11 +24,11 @@ lock:
 	uv pip compile pyproject.toml --extra plugins -o requirements.txt -p $(PYTHON_VERSION)
 
 # Start appworker
-start_appworker:
+appworker:
 	$(VENV_DIR)/bin/python -m nomad.cli admin run appworker
  
 # Start gui
-start_gui:
+gui:
 	npm start --prefix gui
 
 # Target to start infrastructure using docker-compose for infra
