@@ -1,6 +1,3 @@
 [submodule "gui"]
 	path = gui
 	url = https://gitlab.mpcdf.mpg.de/nomad-lab/nomad-gui
-[submodule "packages/perovskite-solar-cell-database"]
-	path = packages/perovskite-solar-cell-database
-	url = https://github.com/FAIRmat-NFDI/nomad-perovskite-solar-cells-database
