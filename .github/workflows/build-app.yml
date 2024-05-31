@@ -25,6 +25,9 @@ jobs:
             image_name: ${{ github.repository }}-api
           - dockerfile: Dockerfile.gui
             image_name: ${{ github.repository }}-gui
+          - dockerfile: Dockerfile.docs
+            image_name: ${{ github.repository }}-docs
+
 
     steps:
       - uses: actions/checkout@v4
