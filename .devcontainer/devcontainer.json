@@ -13,7 +13,6 @@
   // Use 'forwardPorts' to make a list of ports inside the container available locally.
   "forwardPorts": [
     8000,
-    3000
   ],
   // Use 'postCreateCommand' to run commands after the container is created.
   "postCreateCommand": "pipx install uv && chmod 777 /tmp && chmod 777 -R .volumes",

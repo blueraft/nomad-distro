@@ -11,13 +11,11 @@ setup:
 install:
 	. $(VENV_DIR)/bin/activate
 	uv pip install -e ".[dev, plugins]" -c requirements.txt -p $(VENV_DIR)/bin/python
-	npm install --prefix gui
 
 # Target to update submodules and sync Python and Node packages
 sync:
 	git submodule update --init --recursive
 	uv pip install -e ".[dev, plugins]" -c requirements.txt -p $(VENV_DIR)/bin/python
-	npm install --prefix gui
 
 # Lock python dependencies
 lock:
@@ -32,10 +30,6 @@ update:
 appworker:
 	$(VENV_DIR)/bin/python -m nomad.cli admin run appworker
  
-# Start gui
-gui:
-	npm start --prefix gui
-
 # Target to start infrastructure using docker-compose for infra
 infra:
 	docker compose -f docker-compose.infra.yml up -d
