@@ -23,6 +23,11 @@ sync:
 lock:
 	uv pip compile pyproject.toml --extra plugins -o requirements.txt -p $(PYTHON_VERSION)
 
+# Update dependencies and submodules
+update:
+	git submodule update --remote --merge
+	uv pip compile -U pyproject.toml --extra plugins -o requirements.txt -p $(PYTHON_VERSION)
+
 # Start appworker
 appworker:
 	$(VENV_DIR)/bin/python -m nomad.cli admin run appworker
