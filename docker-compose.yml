@@ -122,7 +122,17 @@ services:
       dockerfile: Dockerfile.gui
     platform: linux/amd64
     container_name: nomad_distro_gui
- 
+      
+  docs:
+    restart: unless-stopped
+    build:
+      context: .
+      dockerfile: Dockerfile.docs
+    platform: linux/amd64
+    container_name: nomad_distro_docs
+    ports:
+      - 4000:80
+
   # nomad proxy (a reverse proxy for nomad)
   proxy:
     restart: unless-stopped
