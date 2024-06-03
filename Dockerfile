@@ -15,7 +15,7 @@ ENV PYTHONPATH "${PYTHONPATH}:/backend/"
 ENV VIRTUAL_ENV=/opt/venv \
     PATH="/opt/venv/bin:$PATH"
 
-FROM base AS dev
+FROM base AS builder
 
 # Prevents Python from writing pyc files.
 ENV PYTHONDONTWRITEBYTECODE=1
@@ -77,7 +77,7 @@ RUN apt-get update \
        unzip \
  && rm -rf /var/lib/apt/lists/*
  
-COPY --from=dev /opt/venv /opt/venv
+COPY --from=builder /opt/venv /opt/venv
 COPY examples examples
 
 COPY entrypoint.sh .
