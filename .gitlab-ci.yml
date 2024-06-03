@@ -41,6 +41,7 @@ workflow:
 
 stages:
   - build
+  - release
 
 build:
   stage: build
@@ -61,3 +62,33 @@ build:
       --destination "${CI_REGISTRY_IMAGE}:${DOCKER_TAG}"
       --cache-repo "${CI_REGISTRY_IMAGE}/cache"
       --cache=true
+
+release latest image:
+  stage: release
+  image:
+    name: gcr.io/go-containerregistry/crane:debug
+    entrypoint: [""]
+  variables:
+    GIT_STRATEGY: none
+  script:
+    - crane auth login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+    - crane cp ${CI_REGISTRY_IMAGE}:${DOCKER_TAG} ${CI_REGISTRY_IMAGE}:latest
+  rules:
+    - when: manual
+      allow_failure: true
+
+release stable image:
+  stage: release
+  image:
+    name: gcr.io/go-containerregistry/crane:debug
+    entrypoint: [""]
+  variables:
+    GIT_STRATEGY: none
+  script:
+    - crane auth login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+    - crane cp ${CI_REGISTRY_IMAGE}:${DOCKER_TAG} ${CI_REGISTRY_IMAGE}:stable
+  rules:
+    - if: $CI_COMMIT_TAG
+      when: manual
+      allow_failure: true
+    - when: never
