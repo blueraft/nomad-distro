@@ -92,3 +92,17 @@ release stable image:
       when: manual
       allow_failure: true
     - when: never
+
+python package:
+  stage: release
+  variables:
+    GIT_SUBMODULE_STRATEGY: recursive
+    GIT_SUBMODULE_DEPTH: 1
+    GIT_SUBMODULE_UPDATE_FLAGS: --jobs 4
+  script:
+    - python -m pip install build twine
+    - python -m build
+    - TWINE_PASSWORD=${CI_JOB_TOKEN} TWINE_USERNAME=gitlab-ci-token python -m twine upload --repository-url ${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/packages/pypi dist/*
+  rules:
+    - when: manual
+      allow_failure: true
