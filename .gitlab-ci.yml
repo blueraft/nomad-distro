@@ -104,9 +104,10 @@ build:
     name: ${CI_REGISTRY_IMAGE}:${DOCKER_TAG}
     entrypoint: [""]
   script:
-    - echo ${TARGET_ENV}
+    - CLIENT_URL="https://nomad-lab.eu/prod/v1/${TARGET_ENV}/api"
+    - echo ${CLIENT_URL}
     - nomad --help
-    # - nomad client -n https://nomad-lab.eu/prod/v1/${TARGET_ENV}/api -u test -w $CI_NOMAD_TEST_PASSWORD integrationtests --skip-publish --skip-doi
+      # - nomad client -n ${CLIENT_URL} -u test -w $CI_NOMAD_TEST_PASSWORD integrationtests --skip-publish --skip-doi
 
 deploy_to_test:
   stage: deploy
