@@ -15,7 +15,7 @@ ENV PYTHONPATH "${PYTHONPATH}:/backend/"
 ENV VIRTUAL_ENV=/opt/venv \
     PATH="/opt/venv/bin:$PATH"
 
-FROM base AS builder
+FROM base AS dev
 
 # Prevents Python from writing pyc files.
 ENV PYTHONDONTWRITEBYTECODE=1
@@ -52,16 +52,16 @@ RUN apt-get update \
 # Install UV
 ADD --chmod=755 https://astral.sh/uv/install.sh /install.sh
 RUN /install.sh && rm /install.sh
+ENV UV_NO_CACHE=1
 
 COPY packages packages
+COPY requirements.txt requirements.txt
+COPY pyproject.toml pyproject.toml
 # Download dependencies as a separate step to take advantage of Docker's caching.
 # Leverage a cache mount to /root/.cache/uv to speed up subsequent builds.
 # Leverage a bind mount to requirements to avoid having to copy them into
 # into this layer.
-RUN --mount=type=cache,target=/root/.cache/uv \
-    --mount=type=bind,source=requirements.txt,target=requirements.txt \
-    --mount=type=bind,source=pyproject.toml,target=pyproject.toml \
-    /root/.cargo/bin/uv venv /opt/venv && /root/.cargo/bin/uv pip install -r requirements.txt
+RUN /root/.cargo/bin/uv venv /opt/venv && /root/.cargo/bin/uv pip install -r requirements.txt
 
 # Final stage to create the runnable image with minimal size
 FROM python:${PYTHON_VERSION}-slim-bookworm as final
@@ -77,7 +77,7 @@ RUN apt-get update \
        unzip \
  && rm -rf /var/lib/apt/lists/*
  
-COPY --from=builder /opt/venv /opt/venv
+COPY --from=dev /opt/venv /opt/venv
 COPY examples examples
 
 COPY entrypoint.sh .
