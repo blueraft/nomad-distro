@@ -16,12 +16,15 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+
+version: "3"
+
 services:
   # broker for celery
   rabbitmq:
     restart: "no"
     image: rabbitmq:3.11.5
-    container_name: nomad_distro_infra_rabbitmq
+    container_name: nomad_rabbitmq
     environment:
       - RABBITMQ_ERLANG_COOKIE=SWQOKODSQALRPCLNMEQG
       - RABBITMQ_DEFAULT_USER=rabbitmq
@@ -30,13 +33,13 @@ services:
     ports:
       - 5672:5672
     volumes:
-      - nomad_distro_infra_rabbitmq:/var/lib/rabbitmq
+      - nomad_rabbitmq:/var/lib/rabbitmq
 
   # the search engine
   elastic:
     restart: "no"
     image: docker.elastic.co/elasticsearch/elasticsearch:7.17.1
-    container_name: nomad_distro_infra_elastic
+    container_name: nomad_elastic
     environment:
       - ES_JAVA_OPTS=-Xms512m -Xmx512m
       - cluster.routing.allocation.disk.threshold_enabled=true
@@ -48,26 +51,26 @@ services:
     ports:
       - 9200:9200
     volumes:
-      - nomad_distro_infra_elastic:/usr/share/elasticsearch/data
+      - nomad_elastic:/usr/share/elasticsearch/data
 
   # the user data db
   mongo:
     restart: "no"
     image: mongo:5.0.6
-    container_name: nomad_distro_infra_mongo
+    container_name: nomad_mongo
     environment:
       - MONGO_DATA_DIR=/data/db
       - MONGO_LOG_DIR=/dev/null
     ports:
       - 27017:27017
     volumes:
-      - nomad_distro_infra_mongo:/data/db
-      - nomad_distro_infra_mongo_config:/data/configdb
+      - nomad_mongo:/data/db
+      - nomad_mongo_config:/data/configdb
     command: mongod
     # --logpath=/dev/null # --quiet
 
 volumes:
-  nomad_distro_infra_mongo:
-  nomad_distro_infra_mongo_config:
-  nomad_distro_infra_elastic:
-  nomad_distro_infra_rabbitmq:
+  nomad_mongo:
+  nomad_mongo_config:
+  nomad_elastic:
+  nomad_rabbitmq:

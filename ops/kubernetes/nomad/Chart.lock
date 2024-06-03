@@ -1,0 +1,12 @@
+dependencies:
+- name: rabbitmq
+  repository: https://charts.bitnami.com/bitnami
+  version: 11.2.2
+- name: elasticsearch
+  repository: https://helm.elastic.co
+  version: 7.17.3
+- name: mongodb
+  repository: oci://registry-1.docker.io/bitnamicharts
+  version: 14.0.4
+digest: sha256:5cf296b1e3b175d0950ac527a594610574534cd058d8026568c98a4b25d628ea
+generated: "2024-05-31T14:33:26.454253346+02:00"
