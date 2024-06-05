@@ -13,14 +13,19 @@ version = "0.1"
 readme = "README.md"
 requires-python = ">=3.9"
 license = { file = "LICENSE" }
-dependencies = ["nomad-lab[infrastructure, parsing]>=1.3.0"]
+dependencies = [
+  "nomad-lab[infrastructure, parsing]>=1.3.0",
+  "pybis @ git+https://github.com/FAIRmat-NFDI/fairmat-pybis.git@91039c2a1df364c88ab7e284b59c43ec42f18370",
+]
 
 [project.optional-dependencies]
 plugins = [
   "nomad-sintering @ git+https://github.com/hampusnasstrom/nomad-sintering.git",
-  "pybis @ git+https://github.com/FAIRmat-NFDI/fairmat-pybis.git@91039c2a1df364c88ab7e284b59c43ec42f18370",
-  "nomad-porous-materials @ file://${PROJECT_ROOT}/packages/nomad-porous-materials",
-  "structlog",
+  "nomad-measurements @ git+https://github.com/FAIRmat-NFDI/nomad-measurements@main",
+  "nomad-material-processing @ git+https://github.com/FAIRmat-NFDI/nomad-material-processing@main",
+  "nomad-catalysis @ git+https://github.com/schumannj/nomad-schema-plugin-fhi-catalysis@main",
+  "nomad-analysis @ git+https://github.com/FAIRmat-NFDI/nomad-analysis@develop",
+  "uv-vis-nir-transmission @ git+https://github.com/FAIRmat-NFDI/AreaA-data_modeling_and_schemas.git@f53390fc1a4b80fa4d9e7ebbe4516f461f54ed61#subdirectory=transmission/transmission_plugin/uv_vis_nir_transmission_plugin",
 ]
 dev = ["pytest"]
 
