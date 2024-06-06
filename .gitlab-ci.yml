@@ -85,7 +85,7 @@ build python package:
     GIT_SUBMODULE_DEPTH: 1
     GIT_SUBMODULE_UPDATE_FLAGS: --jobs 4
   script:
-    - python -m pip install build twine
+    - python -m pip install build
     - python -m build
   artifacts:
     paths:
@@ -226,6 +226,7 @@ release stable image:
 release python package:
   stage: release
   script:
+    - python -m pip install twine
     - TWINE_PASSWORD=${CI_JOB_TOKEN} TWINE_USERNAME=gitlab-ci-token python -m twine upload --repository-url ${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/packages/pypi dist/*
   rules:
     - when: manual
