@@ -25,6 +25,7 @@ dependencies = [
 [project.optional-dependencies]
 plugins = [
   "nomad-sintering @ git+https://github.com/hampusnasstrom/nomad-sintering.git",
+  "nomad-porous-materials @ file://${PROJECT_ROOT}/packages/nomad-porous-materials",
   "nomad-measurements @ git+https://github.com/FAIRmat-NFDI/nomad-measurements@main",
   "nomad-material-processing @ git+https://github.com/FAIRmat-NFDI/nomad-material-processing@main",
   "nomad-catalysis @ git+https://github.com/schumannj/nomad-schema-plugin-fhi-catalysis@main",
