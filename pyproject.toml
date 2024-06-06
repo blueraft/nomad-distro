@@ -9,7 +9,7 @@ classifiers = [
 ]
 name = "nomad-distribution"
 description = "nomad distribution template"
-version = "0.1"
+dynamic = ["version"]
 readme = "README.md"
 requires-python = ">=3.9"
 license = { file = "LICENSE" }
@@ -34,3 +34,4 @@ index-url = "https://gitlab.mpcdf.mpg.de/api/v4/projects/2187/packages/pypi/simp
 
 [tool.setuptools.packages.find]
 exclude = ["gui*", "docs*", "config*"]
+[tool.setuptools_scm]
