@@ -44,6 +44,7 @@ variables:
 
 stages:
   - build
+  - test
   - deploy
   - release
 
@@ -66,6 +67,33 @@ build image:
       --destination "${CI_REGISTRY_IMAGE}:${DOCKER_TAG}"
       --cache-repo "${CI_REGISTRY_IMAGE}/cache"
       --cache=true
+
+build helm chart:
+  stage: build
+  script:
+    - helm package -u ops/kubernetes/nomad -d ops/kubernetes
+    - 'curl --request POST --user gitlab-ci-token:$CI_JOB_TOKEN --form "chart=@ops/kubernetes/nomad-1.1.0.tgz" "${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/packages/helm/api/latest/charts"'
+  rules:
+    - if: $CI_COMMIT_BRANCH == "develop"
+    - when: manual
+      allow_failure: true
+
+
+check helm chart:
+  stage: test
+  image: ${CI_REGISTRY_IMAGE}:${DOCKER_TAG}
+  script:
+    - scripts/check_helm_chart.sh
+  after_script:
+    - >
+      if [ $CI_JOB_STATUS == 'failed' ]; then
+        echo 'Make sure that the helm chart values.yaml has been updated and committed by running'
+        echo './scripts/update_hem_chart.sh'
+      fi
+  rules:
+    - if: $CI_COMMIT_TAG
+      when: never
+    - when: on_success
 
 .tag image:
   image:
