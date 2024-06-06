@@ -78,7 +78,23 @@ build helm chart:
     - when: manual
       allow_failure: true
 
+build python package:
+  stage: build
+  variables:
+    GIT_SUBMODULE_STRATEGY: recursive
+    GIT_SUBMODULE_DEPTH: 1
+    GIT_SUBMODULE_UPDATE_FLAGS: --jobs 4
+  script:
+    - python -m pip install build twine
+    - python -m build
+  artifacts:
+    paths:
+      - dist/
+    expire_in: 1 hour
+  rules:
+    - when: on_success
 
+ 
 check helm chart:
   stage: test
   image: ${CI_REGISTRY_IMAGE}:${DOCKER_TAG}
@@ -94,6 +110,19 @@ check helm chart:
     - if: $CI_COMMIT_TAG
       when: never
     - when: on_success
+ 
+install tests:
+  stage: test
+  image: python:3.9
+  variables:
+    UV_SYSTEM_PYTHON: true
+  script:
+    - pip install uv
+    - uv pip install dist/nomad_*.tar.gz
+    - python -c 'import nomad.cli'
+    - python -c 'from nomad.client import ArchiveQuery'
+    - uv pip install git+https://github.com/nomad-coe/nomad-parser-example.git
+    - python -m exampleparser tests/data/examples/example.out
 
 .tag image:
   image:
@@ -173,6 +202,7 @@ release latest image:
     - when: manual
       allow_failure: true
 
+
 release stable image:
   stage: release
   extends: .tag image
@@ -184,13 +214,7 @@ release stable image:
 
 release python package:
   stage: release
-  variables:
-    GIT_SUBMODULE_STRATEGY: recursive
-    GIT_SUBMODULE_DEPTH: 1
-    GIT_SUBMODULE_UPDATE_FLAGS: --jobs 4
   script:
-    - python -m pip install build twine
-    - python -m build
     - TWINE_PASSWORD=${CI_JOB_TOKEN} TWINE_USERNAME=gitlab-ci-token python -m twine upload --repository-url ${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/packages/pypi dist/*
   rules:
     - when: manual
