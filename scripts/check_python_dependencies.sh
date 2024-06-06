@@ -14,24 +14,19 @@ project_dir=$(dirname $(dirname $(realpath $0)))
 
 cd $project_dir
 
-# do no support git install for pynxtools
-grep pynxtools pyproject.toml | grep "@git+" 1>&2
-
 # backup
 cp requirements.txt requirements.txt.tmp
 cp requirements-dev.txt requirements-dev.txt.tmp
 
-uv pip compile -q -U --annotation-style=line \
-    --extra=infrastructure --extra=parsing \
+uv pip compile -q -p 3.9 --annotation-style=line \
+    --extra=plugins \
     --output-file=requirements.txt \
-    dependencies/nomad-dos-fingerprints/pyproject.toml \
-    dependencies/parsers/eelsdb/pyproject.toml \
     pyproject.toml
 
 diff requirements.txt.tmp requirements.txt
 
-uv pip compile -q -U --annotation-style=line \
-    --extra=dev --extra=infrastructure --extra=parsing \
+uv pip compile -q -p 3.9 --annotation-style=line \
+    --extra=dev --extra=plugins \
     --output-file=requirements-dev.txt \
     requirements.txt \
     pyproject.toml

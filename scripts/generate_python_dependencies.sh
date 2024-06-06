@@ -15,15 +15,13 @@ project_dir=$(dirname $(dirname $(realpath $0)))
 cd $project_dir
 
 
-uv pip compile -U -p 3.9 --annotation-style=line \
-    --extra=infrastructure --extra=parsing \
+uv pip compile -p 3.9 --annotation-style=line \
+    --extra=plugins \
     --output-file=requirements.txt \
-    dependencies/nomad-dos-fingerprints/pyproject.toml \
-    dependencies/parsers/eelsdb/pyproject.toml \
     pyproject.toml
 
-uv pip compile -U -p 3.9 --annotation-style=line \
-    --extra=dev --extra=infrastructure --extra=parsing \
+uv pip compile -p 3.9 --annotation-style=line \
+    --extra=dev --extra=plugins \
     --output-file=requirements-dev.txt \
     requirements.txt \
     pyproject.toml

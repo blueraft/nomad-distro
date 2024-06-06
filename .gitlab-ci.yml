@@ -124,6 +124,17 @@ install tests:
     - uv pip install git+https://github.com/nomad-coe/nomad-parser-example.git
     - python -m exampleparser tests/data/examples/example.out
 
+check python dependencies:
+  stage: test
+  image: python:3.9
+  variables:
+    GIT_SUBMODULE_STRATEGY: recursive
+    GIT_SUBMODULE_UPDATE_FLAGS: --jobs 4
+  before_script:
+    - pip install uv
+  script:
+    - scripts/check_python_dependencies.sh
+
 .tag image:
   image:
     name: gcr.io/go-containerregistry/crane:debug
