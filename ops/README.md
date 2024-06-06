@@ -6,4 +6,4 @@ normal public dockerhub images or you have to setup your own private registry wi
 respective images.
 
 The NOMAD specific images are provide by our
-[gitlab container registry](https://gitlab.mpcdf.mpg.de/nomad-lab/nomad-FAIR/container_registry).
+[gitlab container registry](https://gitlab.mpcdf.mpg.de/nomad-lab/nomad-distro/container_registry).

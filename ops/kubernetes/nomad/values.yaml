@@ -19,7 +19,7 @@ serviceAccount:
 nomad:
   enabled: true
   image:
-    repository: gitlab-registry.mpcdf.mpg.de/nomad-lab/nomad-fair
+    repository: gitlab-registry.mpcdf.mpg.de/nomad-lab/nomad-distro
     tag: latest
     pullPolicy: Always
 
@@ -35,7 +35,7 @@ nomad:
     meta:
       service: app
       homepage: https://nomad-lab.eu
-      source_url: https://gitlab.mpcdf.mpg.de/nomad-lab/nomad-FAIR
+      source_url: https://gitlab.mpcdf.mpg.de/nomad-lab/nomad-distro
       maintainer_email: markus.scheidgen@physik.hu-berlin.de
 
     api:

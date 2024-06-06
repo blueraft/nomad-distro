@@ -80,12 +80,12 @@ RUN apt-get update \
 COPY --from=builder /opt/venv /opt/venv
 COPY examples examples
 
-COPY entrypoint.sh .
-
 # Activate the virtualenv in the container
 # See here for more information:
 # https://pythonspeed.com/articles/multi-stage-docker-python/
 ENV PATH="/opt/venv/bin:$PATH"
 
-# Run the application.
-ENTRYPOINT ["/app/entrypoint.sh"]
+RUN useradd -u 1000 nomad
+
+COPY --chown=nomad:1000 scripts/run.sh .
+COPY --chown=nomad:1000 scripts/run-worker.sh .

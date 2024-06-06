@@ -47,7 +47,7 @@ stages:
   - deploy
   - release
 
-build:
+build image:
   stage: build
   image:
     name: gcr.io/kaniko-project/executor:debug
@@ -67,7 +67,7 @@ build:
       --cache-repo "${CI_REGISTRY_IMAGE}/cache"
       --cache=true
 
-.tag-image:
+.tag image:
   image:
     name: gcr.io/go-containerregistry/crane:debug
     entrypoint: [""]
@@ -78,27 +78,27 @@ build:
     - echo ${TARGET_ENV}
     - crane cp ${CI_REGISTRY_IMAGE}:${DOCKER_TAG} ${CI_REGISTRY_IMAGE}:${TARGET_ENV}
 
-.helm-upgrade: &helm_upgrade
+.deploy image: &deploy_image
   stage: deploy
   image: gitlab-registry.mpcdf.mpg.de/nomad-lab/nomad-fair/ci-runner:latest
   before_script:
     - mkdir ~/.kube/
-    # - echo ${CI_K8S_CLOUD_CONFIG} | base64 -d > ~/.kube/config
+    - echo ${CI_K8S_CLOUD_CONFIG} | base64 -d > ~/.kube/config
   script:
     - echo ${TARGET_ENV}
-    - helm version
-    # - helm dependency update ops/kubernetes/nomad
-    # - helm upgrade nomad-${TARGET_ENV} ops/kubernetes/nomad
-    #   --install
-    #   --namespace nomad-${TARGET_ENV}
-    #   --values ops/kubernetes/values.yaml
-    #   --values ops/kubernetes/nomad-${TARGET_ENV}.yaml
-    #   --set nomad.image.tag=${TARGET_ENV}
-    #   --set roll=true
-    #   --timeout=15m
-    #   --wait
+    - helm dependency update ops/kubernetes/nomad
+    - helm upgrade nomad-prod-${TARGET_ENV} ops/kubernetes/nomad
+      --install
+      --namespace nomad-prod-${TARGET_ENV}
+      --values ops/kubernetes/values.yaml
+      --values plugins-values.yaml
+      --values ops/kubernetes/nomad-prod-${TARGET_ENV}.yaml
+      --set nomad.image.tag=${TARGET_ENV}
+      --set roll=true
+      --timeout=15m
+      --wait
 
-.test-deployment: &test_deployment
+.test deployment: &test_deployment
   stage: deploy
   image:
     name: ${CI_REGISTRY_IMAGE}:${DOCKER_TAG}
@@ -106,20 +106,19 @@ build:
   script:
     - CLIENT_URL="https://nomad-lab.eu/prod/v1/${TARGET_ENV}/api"
     - echo ${CLIENT_URL}
-    - nomad --help
-      # - nomad client -n ${CLIENT_URL} -u test -w $CI_NOMAD_TEST_PASSWORD integrationtests --skip-publish --skip-doi
+    - nomad client -n $CLIENT_URL -u test -w $CI_NOMAD_TEST_PASSWORD integrationtests --skip-publish --skip-doi
 
-deploy_to_test:
+deploy distro:
   stage: deploy
   extends:
-    - .tag-image
+    - .tag image
   variables:
-    TARGET_ENV: test
+    TARGET_ENV: distro
   before_script:
-    - echo "TARGET_ENV=test" >> build.env
-    - echo "name=test" >> build.env
+    - echo "TARGET_ENV=distro" >> build.env
+    - echo "name=distro" >> build.env
     - echo "deployment_tier=production" >> build.env
-    - echo "url=https://nomad-lab.eu/prod/v1/test" >> build.env
+    - echo "url=https://nomad-lab.eu/prod/v1/distro" >> build.env
   artifacts:
     reports:
       dotenv: build.env
@@ -127,19 +126,19 @@ deploy_to_test:
     - when: manual
       allow_failure: true
 
-deploy_test_helm_upgrade:
+deploy distro image:
   stage: deploy
-  needs: ["deploy_to_test"]
-  <<: *helm_upgrade
+  needs: ["deploy distro"]
+  <<: *deploy_image
 
-deploy_test_deployment_test:
+test distro deployment:
   stage: deploy
-  needs: ["deploy_to_test", "deploy_test_helm_upgrade"]
+  needs: ["deploy distro", "deploy distro image"]
   <<: *test_deployment
 
 release latest image:
   stage: release
-  extends: .tag-image
+  extends: .tag image
   variables:
     TARGET_ENV: latest
   rules:
@@ -148,14 +147,14 @@ release latest image:
 
 release stable image:
   stage: release
-  extends: .tag-image
+  extends: .tag image
   variables:
     TARGET_ENV: stable
   rules:
     - when: manual
       allow_failure: true
 
-python package:
+release python package:
   stage: release
   variables:
     GIT_SUBMODULE_STRATEGY: recursive
