@@ -12,11 +12,11 @@
   },
   // Use 'forwardPorts' to make a list of ports inside the container available locally.
   "forwardPorts": [
-    8000,
+    8000
   ],
   // Use 'postCreateCommand' to run commands after the container is created.
   "postCreateCommand": "pipx install uv && chmod 777 /tmp && chmod 777 -R .volumes",
-  "postAttachCommand": "make setup && make install",
+  "postAttachCommand": "docker compose -f ops/docker-compose/infrastructure/docker-compose.yml up -d && make setup && make install",
   // Configure tool-specific properties.
   "customizations": {
     // Configure properties specific to VS Code.
