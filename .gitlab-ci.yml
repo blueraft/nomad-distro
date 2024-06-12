@@ -56,10 +56,12 @@ update dependencies:
     - scripts/generate_python_dependencies.sh
     - git config user.name "CI Pipeline"
     - git config user.email "cipipeline@nomad-lab.eu"
-    - git add requirements*
-    - git commit -m "update requirements in CI"
     - git remote add gitlab_origin https://oauth2:$CI_ACCESS_TOKEN@gitlab.mpcdf.mpg.de/nomad-lab/nomad-distro.git
-    - git push gitlab_origin HEAD:main -o ci.skip # prevent triggering pipeline again
+    - git add requirements*
+    - |
+      if [[ `git status --porcelain` ]]; then
+        git commit -m "update requirements in CI" && git push gitlab_origin HEAD:main -o ci.skip # prevent triggering pipeline again
+      fi
   rules:
     - if: $CI_PIPELINE_SOURCE == "schedule"
       when: always
