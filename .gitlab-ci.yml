@@ -212,6 +212,8 @@ deploy distro:
     reports:
       dotenv: build.env
   rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH && $CI_PIPELINE_SOURCE == "schedule"
+      when: on_success
     - when: manual
       allow_failure: true
 
