@@ -53,8 +53,6 @@ update dependencies:
   before_script:
     - pip install --upgrade uv
   script:
-    - echo $CI_PIPELINE_SOURCE
-    - echo $NIGHTLY
     - scripts/generate_python_dependencies.sh
     - git config user.name "CI Pipeline"
     - git config user.email "cipipeline@nomad-lab.eu"
@@ -62,6 +60,12 @@ update dependencies:
     - git commit -m "update requirements in CI"
     - git remote add gitlab_origin https://oauth2:$CI_ACCESS_TOKEN@gitlab.mpcdf.mpg.de/nomad-lab/nomad-distro.git
     - git push gitlab_origin HEAD:main -o ci.skip # prevent triggering pipeline again
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "schedule"
+      when: always
+      allow_failure: false
+    - when: manual
+      allow_failure: true
 
 build image:
   stage: build
