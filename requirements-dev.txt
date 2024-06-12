@@ -69,6 +69,7 @@ exceptiongroup==1.2.1     # via anyio, ipython, pytest, -r requirements.txt
 executing==2.0.1          # via stack-data, -r requirements.txt
 f90wrap==0.2.14           # via quippy-ase, -r requirements.txt
 fabio==2024.4.0           # via pyfai, silx, -r requirements.txt
+fairmat-readers-xrd==0.0.3  # via nomad-measurements, -r requirements.txt
 fastapi==0.99.1           # via h5grove, nomad-lab, -r requirements.txt
 fasteners==0.19           # via mdanalysis, zarr, -r requirements.txt
 fastjsonschema==2.19.1    # via nbformat, -r requirements.txt
@@ -179,7 +180,7 @@ nomad-analysis @ git+https://github.com/FAIRmat-NFDI/nomad-analysis@dad42da6d606
 nomad-catalysis @ git+https://github.com/schumannj/nomad-schema-plugin-fhi-catalysis@f08aa09cb4c17d4bcdc361781b557459d2bf555b  # via -r requirements.txt, nomad-distribution (pyproject.toml)
 nomad-lab==1.3.0          # via nomad-analysis, nomad-catalysis, nomad-material-processing, nomad-measurements, nomad-porous-materials, nomad-sintering, uv-vis-nir-transmission, -r requirements.txt, nomad-distribution (pyproject.toml)
 nomad-material-processing @ git+https://github.com/FAIRmat-NFDI/nomad-material-processing@0e617a9ae53b38cc89cc608506f868ac6daee4ba  # via -r requirements.txt, nomad-distribution (pyproject.toml)
-nomad-measurements @ git+https://github.com/FAIRmat-NFDI/nomad-measurements@e482c0b5b156d5e4aff77c0852d32dec0c3b7b2f  # via -r requirements.txt, nomad-distribution (pyproject.toml)
+nomad-measurements @ git+https://github.com/FAIRmat-NFDI/nomad-measurements@be2bd4913a1aa37eb208b0827877822e8c6ebb9f  # via -r requirements.txt, nomad-distribution (pyproject.toml)
 nomad-porous-materials @ file://${PROJECT_ROOT}/packages/nomad-porous-materials  # via -r requirements.txt, nomad-distribution (pyproject.toml)
 nomad-sintering @ git+https://github.com/hampusnasstrom/nomad-sintering.git@4135a389d1239b80423e13d68c07fb0206d3fa1c  # via -r requirements.txt, nomad-distribution (pyproject.toml)
 notebook==7.1.3           # via jupyter, -r requirements.txt
@@ -188,7 +189,7 @@ nptyping==1.4.4           # via nomad-lab, -r requirements.txt
 numba==0.59.1             # via diffsims, hyperspy, kikuchipy, orix, pyxem, sparse, -r requirements.txt
 numcodecs==0.12.1         # via zarr, -r requirements.txt
 numexpr==2.10.0           # via hyperspy, pyfai, pyxem, tables, -r requirements.txt
-numpy==1.22.4             # via ase, biopython, blosc2, cftime, contourpy, dask, diffsims, f90wrap, fabio, findiff, griddataformats, gsd, h5grove, h5py, hyperspy, ifes-apt-tc-data-modeling, imageio, kikuchipy, lmfit, matid, matplotlib, mdanalysis, mrcfile, netcdf4, niondata, nionswift, nionswift-io, nionui, nomad-lab, nptyping, numba, numcodecs, numexpr, numpy-quaternion, orix, pandas, phonopy, pycifrw, pyedr, pyfai, pymatgen, pynxtools, pywavelets, pyxem, quippy-ase, radioactivedecay, rdkit, rosettasciio, scikit-image, scikit-learn, scipy, silx, sparse, spglib, tables, tifffile, xarray, xraydb, zarr, -r requirements.txt
+numpy==1.22.4             # via ase, biopython, blosc2, cftime, contourpy, dask, diffsims, f90wrap, fabio, fairmat-readers-xrd, findiff, griddataformats, gsd, h5grove, h5py, hyperspy, ifes-apt-tc-data-modeling, imageio, kikuchipy, lmfit, matid, matplotlib, mdanalysis, mrcfile, netcdf4, niondata, nionswift, nionswift-io, nionui, nomad-lab, nptyping, numba, numcodecs, numexpr, numpy-quaternion, orix, pandas, phonopy, pycifrw, pyedr, pyfai, pymatgen, pynxtools, pywavelets, pyxem, quippy-ase, radioactivedecay, rdkit, rosettasciio, scikit-image, scikit-learn, scipy, silx, sparse, spglib, tables, tifffile, xarray, xraydb, zarr, -r requirements.txt
 numpy-quaternion==2023.0.3  # via orix, -r requirements.txt
 oauthenticator==15.1.0    # via nomad-lab, -r requirements.txt
 oauthlib==3.2.2           # via jupyterhub, -r requirements.txt
@@ -208,7 +209,7 @@ partd==1.4.2              # via dask, -r requirements.txt
 pexpect==4.9.0            # via ipython, -r requirements.txt
 phonopy==2.23.1           # via asr, -r requirements.txt
 pillow==10.3.0            # via fabio, imageio, matplotlib, nionswift, rdkit, scikit-image, -r requirements.txt
-pint==0.17                # via hyperspy, nomad-lab, rosettasciio, -r requirements.txt
+pint==0.17                # via fairmat-readers-xrd, hyperspy, nomad-lab, rosettasciio, -r requirements.txt
 platformdirs==4.2.2       # via jupyter-core, pooch, xraydb, -r requirements.txt
 plotly==5.22.0            # via asr, pymatgen, -r requirements.txt
 pluggy==1.5.0             # via pytest
@@ -344,7 +345,7 @@ werkzeug==3.0.3           # via flask, -r requirements.txt
 widgetsnbextension==4.0.11  # via ipywidgets, -r requirements.txt
 wrapt==1.16.0             # via nomad-lab, -r requirements.txt
 xarray==2023.12.0         # via nomad-lab, pynxtools, pynxtools-mpes, pynxtools-xps, -r requirements.txt
-xmltodict==0.13.0         # via ifes-apt-tc-data-modeling, nomad-measurements, pynxtools-em, -r requirements.txt
+xmltodict==0.13.0         # via fairmat-readers-xrd, ifes-apt-tc-data-modeling, nomad-measurements, pynxtools-em, -r requirements.txt
 xraydb==4.5.4             # via pynxtools-em, -r requirements.txt
 zarr==2.17.1              # via hyperspy, -r requirements.txt
 zipp==3.18.2              # via importlib-metadata, importlib-resources, -r requirements.txt
