@@ -52,11 +52,11 @@ update dependencies:
     DOCKER_BUILDKIT: 1
   before_script:
     - pip install --upgrade uv
-  script:
-    - scripts/generate_python_dependencies.sh
     - git config user.name "CI Pipeline"
     - git config user.email "cipipeline@nomad-lab.eu"
     - git remote add gitlab_origin https://oauth2:$CI_ACCESS_TOKEN@gitlab.mpcdf.mpg.de/nomad-lab/nomad-distro.git
+  script:
+    - scripts/generate_python_dependencies.sh
     - git add requirements*
     - |
       if [[ `git status --porcelain` ]]; then
