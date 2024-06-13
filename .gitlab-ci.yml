@@ -54,7 +54,7 @@ update dependencies:
     - pip install --upgrade uv
     - git config user.name "CI Pipeline"
     - git config user.email "cipipeline@nomad-lab.eu"
-    - git remote add gitlab_origin https://oauth2:$CI_ACCESS_TOKEN@gitlab.mpcdf.mpg.de/nomad-lab/nomad-distro.git
+    - git remote add gitlab_origin https://oauth2:$CI_ACCESS_TOKEN@gitlab.mpcdf.mpg.de/nomad-lab/nomad-distro.git &> /dev/null
   script:
     - scripts/generate_python_dependencies.sh
     - git add requirements*
@@ -62,6 +62,8 @@ update dependencies:
       if [[ `git status --porcelain` ]]; then
         git commit -m "update requirements in CI" && git push gitlab_origin HEAD:main -o ci.skip # prevent triggering pipeline again
       fi
+  after_script:
+    - git remote rm gitlab_origin &> /dev/null
   rules:
     - if: $CI_PIPELINE_SOURCE == "schedule"
       when: always
