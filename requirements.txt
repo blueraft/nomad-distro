@@ -181,7 +181,7 @@ nomad-lab==1.3.0          # via nomad-analysis, nomad-catalysis, nomad-material-
 nomad-material-processing @ git+https://github.com/FAIRmat-NFDI/nomad-material-processing@0e617a9ae53b38cc89cc608506f868ac6daee4ba  # via nomad-distribution (pyproject.toml)
 nomad-measurements @ git+https://github.com/FAIRmat-NFDI/nomad-measurements@be2bd4913a1aa37eb208b0827877822e8c6ebb9f  # via nomad-distribution (pyproject.toml)
 nomad-porous-materials @ file://${PROJECT_ROOT}/packages/nomad-porous-materials  # via nomad-distribution (pyproject.toml)
-nomad-sintering @ git+https://github.com/hampusnasstrom/nomad-sintering.git@4135a389d1239b80423e13d68c07fb0206d3fa1c  # via nomad-distribution (pyproject.toml)
+nomad-sintering @ git+https://github.com/hampusnasstrom/nomad-sintering.git@2af8188039c880cf9829d83e9e9f496436f87314  # via nomad-distribution (pyproject.toml)
 notebook==7.1.3           # via jupyter
 notebook-shim==0.2.4      # via jupyterlab, notebook
 nptyping==1.4.4           # via nomad-lab
