@@ -31,6 +31,7 @@ plugins = [
   "nomad-catalysis @ git+https://github.com/schumannj/nomad-schema-plugin-fhi-catalysis@main",
   "nomad-analysis @ git+https://github.com/FAIRmat-NFDI/nomad-analysis@develop",
   "uv-vis-nir-transmission @ git+https://github.com/FAIRmat-NFDI/AreaA-data_modeling_and_schemas.git@f53390fc1a4b80fa4d9e7ebbe4516f461f54ed61#subdirectory=transmission/transmission_plugin/uv_vis_nir_transmission_plugin",
+  "perovskite-solar-cell-database @ git+https://github.com/FAIRmat-NFDI/nomad-perovskite-solar-cells-database@main",
 ]
 dev = ["pytest"]
 
