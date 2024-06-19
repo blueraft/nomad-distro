@@ -117,7 +117,6 @@ build python package:
   rules:
     - when: on_success
 
- 
 check helm chart:
   stage: test
   image: ${CI_REGISTRY_IMAGE}:${DOCKER_TAG}
@@ -133,7 +132,7 @@ check helm chart:
     - if: $CI_COMMIT_TAG
       when: never
     - when: on_success
- 
+
 install tests:
   stage: test
   image: python:3.9
@@ -237,7 +236,6 @@ release latest image:
   rules:
     - when: manual
       allow_failure: true
-
 
 release stable image:
   stage: release
