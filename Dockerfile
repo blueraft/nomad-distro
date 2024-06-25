@@ -50,8 +50,9 @@ RUN apt-get update \
  && rm -rf /var/lib/apt/lists/*
 
 # Install UV
-ADD --chmod=755 https://astral.sh/uv/install.sh /install.sh
-RUN /install.sh && rm /install.sh
+RUN curl -LsSf https://astral.sh/uv/install.sh | sh
+ENV PATH="/root/.cargo/bin/:$PATH"
+
 ENV UV_NO_CACHE=1
 
 COPY packages packages
@@ -61,7 +62,7 @@ COPY pyproject.toml pyproject.toml
 # Leverage a cache mount to /root/.cache/uv to speed up subsequent builds.
 # Leverage a bind mount to requirements to avoid having to copy them into
 # into this layer.
-RUN /root/.cargo/bin/uv venv /opt/venv && /root/.cargo/bin/uv pip install -r requirements.txt
+RUN uv venv /opt/venv && uv pip install -r requirements.txt
 
 # Final stage to create the runnable image with minimal size
 FROM python:${PYTHON_VERSION}-slim-bookworm as final
