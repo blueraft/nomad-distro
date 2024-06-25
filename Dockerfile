@@ -76,7 +76,11 @@ RUN apt-get update \
        curl \
        zip \
        unzip \
- && rm -rf /var/lib/apt/lists/*
+       nodejs \
+       npm \
+       && npm install -g configurable-http-proxy@^4.2.0 \
+       # clean cache and logs
+       && rm -rf /var/lib/apt/lists/* /var/log/* /var/tmp/* ~/.npm
  
 COPY --from=builder /opt/venv /opt/venv
 COPY examples examples
@@ -90,3 +94,15 @@ RUN useradd -u 1000 nomad
 
 COPY --chown=nomad:1000 scripts/run.sh .
 COPY --chown=nomad:1000 scripts/run-worker.sh .
+
+RUN mkdir -p /app/.volumes/fs \
+ && chown -R nomad:1000 /app \
+ && chown -R nomad:1000 /opt/venv
+
+USER nomad
+
+# The application ports
+EXPOSE 8000
+EXPOSE 9000
+
+VOLUME /app/.volumes/fs
