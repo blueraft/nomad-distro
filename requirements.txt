@@ -177,7 +177,7 @@ nionswift-io==0.15.1      # via nionswift
 nionui==0.6.11            # via nionswift
 nionutils==0.4.10         # via niondata, nionswift, nionswift-io, nionui
 nomad-analysis @ git+https://github.com/FAIRmat-NFDI/nomad-analysis@dad42da6d606e0d20f98bce446e74937f5d3e0d5  # via nomad-distribution (pyproject.toml)
-nomad-catalysis @ git+https://github.com/schumannj/nomad-schema-plugin-fhi-catalysis@6e7b37148431b7857cce5b2d184f95b91d3c9d72  # via nomad-distribution (pyproject.toml)
+nomad-catalysis @ git+https://github.com/schumannj/nomad-schema-plugin-fhi-catalysis@98c0a5fd40e1bd41fa082181aa39402c49e16e3f  # via nomad-distribution (pyproject.toml)
 nomad-lab==1.3.3.dev86+ged7424bac  # via nomad-analysis, nomad-catalysis, nomad-material-processing, nomad-measurements, nomad-porous-materials, nomad-sintering, uv-vis-nir-transmission, nomad-distribution (pyproject.toml)
 nomad-material-processing @ git+https://github.com/FAIRmat-NFDI/nomad-material-processing@0e617a9ae53b38cc89cc608506f868ac6daee4ba  # via nomad-distribution (pyproject.toml)
 nomad-measurements @ git+https://github.com/FAIRmat-NFDI/nomad-measurements@ff8c7d5f21dd5945b67da98fad163d84239fce98  # via nomad-distribution (pyproject.toml)
