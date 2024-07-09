@@ -15,14 +15,8 @@ project_dir=$(dirname $(dirname $(realpath $0)))
 cd $project_dir
 
 
-uv pip compile -p 3.9 --annotation-style=line \
+uv pip compile --universal --annotation-style=line \
     --extra=plugins \
     --output-file=requirements.txt \
-    pyproject.toml
-
-uv pip compile -p 3.9 --annotation-style=line \
-    --extra=dev --extra=plugins \
-    --output-file=requirements-dev.txt \
-    requirements.txt \
     pyproject.toml
 

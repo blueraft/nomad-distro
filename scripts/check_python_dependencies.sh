@@ -16,23 +16,13 @@ cd $project_dir
 
 # backup
 cp requirements.txt requirements.txt.tmp
-cp requirements-dev.txt requirements-dev.txt.tmp
 
-uv pip compile -q -p 3.9 --annotation-style=line \
+uv pip compile -q --universal --annotation-style=line \
     --extra=plugins \
     --output-file=requirements.txt \
     pyproject.toml
 
 diff requirements.txt.tmp requirements.txt
-
-uv pip compile -q -p 3.9 --annotation-style=line \
-    --extra=dev --extra=plugins \
-    --output-file=requirements-dev.txt \
-    requirements.txt \
-    pyproject.toml
-
-diff requirements-dev.txt.tmp requirements-dev.txt
-
+ 
 # cleanup
 mv requirements.txt.tmp requirements.txt
-mv requirements-dev.txt.tmp requirements-dev.txt
