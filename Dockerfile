@@ -83,7 +83,6 @@ RUN apt-get update \
        && rm -rf /var/lib/apt/lists/* /var/log/* /var/tmp/* ~/.npm
  
 COPY --from=builder /opt/venv /opt/venv
-COPY examples examples
 
 # Activate the virtualenv in the container
 # See here for more information:
@@ -92,6 +91,7 @@ ENV PATH="/opt/venv/bin:$PATH"
 
 RUN useradd -u 1000 nomad
 
+COPY --chown=nomad:1000 examples/data/uploads /app/examples/data/uploads
 COPY --chown=nomad:1000 scripts/run.sh .
 COPY --chown=nomad:1000 scripts/run-worker.sh .
 
