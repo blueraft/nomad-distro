@@ -85,7 +85,7 @@ fqdn==1.5.1               # via jsonschema
 fsspec==2024.6.1          # via dask, hyperspy
 gitdb==4.0.11             # via gitpython
 gitpython==3.1.43         # via nomad-lab
-greenlet==3.0.3 ; python_version < '3.13' and (platform_machine == 'aarch64' or (platform_machine == 'ppc64le' or (platform_machine == 'x86_64' or (platform_machine == 'amd64' or (platform_machine == 'AMD64' or (platform_machine == 'WIN32' or platform_machine == 'win32'))))))  # via sqlalchemy
+greenlet==3.0.3 ; python_version < '3.13' and (platform_machine == 'AMD64' or platform_machine == 'WIN32' or platform_machine == 'aarch64' or platform_machine == 'amd64' or platform_machine == 'ppc64le' or platform_machine == 'win32' or platform_machine == 'x86_64')  # via sqlalchemy
 griddataformats==1.0.2    # via mdanalysis
 gsd==3.3.0                # via mdanalysis
 gunicorn==21.2.0          # via nomad-lab
@@ -259,7 +259,7 @@ python-magic==0.4.24      # via nomad-lab
 python-multipart==0.0.9   # via nomad-lab
 pytz==2024.1              # via nionswift, nomad-lab, pandas
 pywavelets==1.6.0         # via scikit-image
-pywin32==306 ; sys_platform == 'win32' or (platform_python_implementation != 'PyPy' and sys_platform == 'win32')  # via docker, jupyter-core
+pywin32==306 ; sys_platform == 'win32'  # via docker, jupyter-core
 pywinpty==2.0.13 ; os_name == 'nt'  # via jupyter-server, jupyter-server-terminals, terminado
 pyxem==0.16.0             # via pynxtools-em
 pyyaml==6.0.1             # via dask, hyperspy, jupyter-events, kikuchipy, nomad-lab, phonopy, pybtex, pynxtools, pynxtools-mpes, rosettasciio, uvicorn
@@ -335,7 +335,7 @@ uri-template==1.3.0       # via jsonschema
 urllib3==1.26.19          # via docker, elasticsearch, nomad-openbis, requests
 uv-vis-nir-transmission @ git+https://github.com/FAIRmat-NFDI/AreaA-data_modeling_and_schemas.git@f53390fc1a4b80fa4d9e7ebbe4516f461f54ed61#subdirectory=transmission/transmission_plugin/uv_vis_nir_transmission_plugin  # via nomad-distribution (pyproject.toml)
 uvicorn==0.30.1           # via h5grove, nomad-lab
-uvloop==0.19.0 ; sys_platform != 'win32' and (platform_python_implementation != 'PyPy' and sys_platform != 'cygwin')  # via uvicorn
+uvloop==0.19.0 ; platform_python_implementation != 'PyPy' and sys_platform != 'cygwin' and sys_platform != 'win32'  # via uvicorn
 validators==0.18.2        # via nomad-lab
 vine==5.1.0               # via amqp, celery, kombu
 watchfiles==0.22.0        # via uvicorn
