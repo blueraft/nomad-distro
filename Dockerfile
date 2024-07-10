@@ -6,12 +6,11 @@
 
 ARG PYTHON_VERSION=3.9
 
-FROM python:${PYTHON_VERSION}-slim as base
+FROM python:${PYTHON_VERSION}-slim AS base
 
 # Keeps Python from buffering stdout and stderr to avoid situations where
 # the application crashes without emitting any logs due to buffering.
-ENV PYTHONUNBUFFERED 1
-ENV PYTHONPATH "${PYTHONPATH}:/backend/"
+ENV PYTHONUNBUFFERED=1
 ENV VIRTUAL_ENV=/opt/venv \
     PATH="/opt/venv/bin:$PATH"
 
@@ -20,7 +19,7 @@ FROM base AS builder
 # Prevents Python from writing pyc files.
 ENV PYTHONDONTWRITEBYTECODE=1
 
-ENV RUNTIME docker
+ENV RUNTIME=docker
 
 WORKDIR /app
 
@@ -64,8 +63,13 @@ COPY pyproject.toml pyproject.toml
 # into this layer.
 RUN uv venv /opt/venv && uv pip install -r requirements.txt
 
+COPY examples ./examples
+COPY scripts ./scripts
+
+RUN ./scripts/generate_example_uploads.sh
+
 # Final stage to create the runnable image with minimal size
-FROM python:${PYTHON_VERSION}-slim-bookworm as final
+FROM python:${PYTHON_VERSION}-slim-bookworm AS final
 
 WORKDIR /app
 
@@ -91,7 +95,7 @@ ENV PATH="/opt/venv/bin:$PATH"
 
 RUN useradd -u 1000 nomad
 
-COPY --chown=nomad:1000 examples/data/uploads /app/examples/data/uploads
+COPY --chown=nomad:1000 --from=builder /app/examples/data/uploads /app/examples/data/uploads
 COPY --chown=nomad:1000 scripts/run.sh .
 COPY --chown=nomad:1000 scripts/run-worker.sh .
 
