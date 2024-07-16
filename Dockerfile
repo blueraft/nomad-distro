@@ -14,6 +14,42 @@ ENV PYTHONUNBUFFERED=1
 ENV VIRTUAL_ENV=/opt/venv \
     PATH="/opt/venv/bin:$PATH"
 
+# Final stage to create the runnable image with minimal size
+FROM base AS base_final
+
+WORKDIR /app
+
+RUN apt-get update \
+ && apt-get install --yes --quiet --no-install-recommends \
+       libgomp1 \
+       libmagic1 \
+       curl \
+       zip \
+       unzip \
+       nodejs \
+       npm \
+       && npm install -g configurable-http-proxy@^4.2.0 \
+       # clean cache and logs
+       && rm -rf /var/lib/apt/lists/* /var/log/* /var/tmp/* ~/.npm
+ 
+
+# Activate the virtualenv in the container
+# See here for more information:
+# https://pythonspeed.com/articles/multi-stage-docker-python/
+ENV PATH="/opt/venv/bin:$PATH"
+
+# Create a non-privileged user that the frenrug will run under.
+# See https://docs.docker.com/develop/develop-images/dockerfile_best-practices/#user
+ARG UID=1000
+RUN adduser \
+    --disabled-password \
+    --gecos "" \
+    --home "/nonexistent" \
+    --shell "/sbin/nologin" \
+    --no-create-home \
+    --uid "${UID}" \
+    nomad
+
 FROM base AS builder
 
 # Prevents Python from writing pyc files.
@@ -25,7 +61,7 @@ WORKDIR /app
 
 # Create a non-privileged user that the frenrug will run under.
 # See https://docs.docker.com/develop/develop-images/dockerfile_best-practices/#user
-ARG UID=10001
+ARG UID=1000
 RUN adduser \
     --disabled-password \
     --gecos "" \
@@ -54,47 +90,28 @@ ENV PATH="/root/.cargo/bin/:$PATH"
 
 ENV UV_NO_CACHE=1
 
-COPY packages packages
 COPY requirements.txt requirements.txt
 COPY pyproject.toml pyproject.toml
 # Download dependencies as a separate step to take advantage of Docker's caching.
 # Leverage a cache mount to /root/.cache/uv to speed up subsequent builds.
 # Leverage a bind mount to requirements to avoid having to copy them into
 # into this layer.
-RUN uv venv /opt/venv && uv pip install -r requirements.txt
+RUN uv venv /opt/venv --seed && uv pip install -r requirements.txt
+
+# Reduce the size of the packages
+RUN find /opt/venv/ -type d -name 'tests' ! -path '*/networkx/*' -exec rm -r '{}' + \
+ && find /opt/venv/ -type d -name 'test' -exec rm -r '{}' + \
+ && find /opt/venv/ -name '*.so' ! -path '*/h5py/*' ! -path '*/quippy*/*' -print -exec sh -c 'file "{}" | grep -q "not stripped" && strip -s "{}"' \;
+
 
 COPY examples ./examples
 COPY scripts ./scripts
 
 RUN ./scripts/generate_example_uploads.sh
 
-# Final stage to create the runnable image with minimal size
-FROM python:${PYTHON_VERSION}-slim-bookworm AS final
+FROM base_final AS final
 
-WORKDIR /app
-
-RUN apt-get update \
- && apt-get install --yes --quiet --no-install-recommends \
-       libgomp1 \
-       libmagic1 \
-       curl \
-       zip \
-       unzip \
-       nodejs \
-       npm \
-       && npm install -g configurable-http-proxy@^4.2.0 \
-       # clean cache and logs
-       && rm -rf /var/lib/apt/lists/* /var/log/* /var/tmp/* ~/.npm
- 
-COPY --from=builder /opt/venv /opt/venv
-
-# Activate the virtualenv in the container
-# See here for more information:
-# https://pythonspeed.com/articles/multi-stage-docker-python/
-ENV PATH="/opt/venv/bin:$PATH"
-
-RUN useradd -u 1000 nomad
-
+COPY --chown=nomad:1000 --from=builder /opt/venv /opt/venv
 COPY --chown=nomad:1000 --from=builder /app/examples/data/uploads /app/examples/data/uploads
 COPY --chown=nomad:1000 scripts/run.sh .
 COPY --chown=nomad:1000 scripts/run-worker.sh .

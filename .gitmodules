@@ -1,3 +1,0 @@
-[submodule "packages/nomad-porous-materials"]
-	path = packages/nomad-porous-materials
-	url = https://github.com/FAIRmat-NFDI/nomad-porous-materials
