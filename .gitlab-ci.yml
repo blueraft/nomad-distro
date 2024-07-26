@@ -228,6 +228,91 @@ test distro deployment:
   needs: ["deploy distro", "deploy distro image"]
   <<: *test_deployment
 
+deploy test:
+  stage: deploy
+  extends:
+    - .tag image
+  variables:
+    TARGET_ENV: test
+  before_script:
+    - echo "TARGET_ENV=test" >> build.env
+    - echo "name=test" >> build.env
+    - echo "deployment_tier=production" >> build.env
+    - echo "url=https://nomad-lab.eu/prod/v1/test" >> build.env
+  artifacts:
+    reports:
+      dotenv: build.env
+  rules:
+    - when: manual
+      allow_failure: true
+
+deploy test image:
+  stage: deploy
+  needs: ["deploy test"]
+  <<: *deploy_image
+
+test test deployment:
+  stage: deploy
+  needs: ["deploy test", "deploy test image"]
+  <<: *test_deployment
+
+deploy staging:
+  stage: deploy
+  extends:
+    - .tag image
+  variables:
+    TARGET_ENV: staging
+  before_script:
+    - echo "TARGET_ENV=staging" >> build.env
+    - echo "name=staging" >> build.env
+    - echo "deployment_tier=production" >> build.env
+    - echo "url=https://nomad-lab.eu/prod/v1/staging" >> build.env
+  artifacts:
+    reports:
+      dotenv: build.env
+  rules:
+    - when: manual
+      allow_failure: true
+
+deploy staging image:
+  stage: deploy
+  needs: ["deploy staging"]
+  <<: *deploy_image
+
+test staging deployment:
+  stage: deploy
+  needs: ["deploy staging", "deploy staging image"]
+  <<: *test_deployment
+
+deploy develop:
+  stage: deploy
+  extends:
+    - .tag image
+  variables:
+    TARGET_ENV: develop
+  before_script:
+    - echo "TARGET_ENV=develop" >> build.env
+    - echo "name=develop" >> build.env
+    - echo "deployment_tier=production" >> build.env
+    - echo "url=https://nomad-lab.eu/prod/v1/develop" >> build.env
+  artifacts:
+    reports:
+      dotenv: build.env
+  rules:
+    - if: $CI_COMMIT_BRANCH == "develop" && $NIGHTLY
+    - when: manual
+      allow_failure: true
+
+deploy develop image:
+  stage: deploy
+  needs: ["deploy develop"]
+  <<: *deploy_image
+
+test develop deployment:
+  stage: deploy
+  needs: ["deploy develop", "deploy develop image"]
+  <<: *test_deployment
+
 release latest image:
   stage: release
   extends: .tag image

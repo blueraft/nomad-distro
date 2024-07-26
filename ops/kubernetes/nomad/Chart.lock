@@ -8,5 +8,8 @@ dependencies:
 - name: mongodb
   repository: oci://registry-1.docker.io/bitnamicharts
   version: 14.0.4
-digest: sha256:5cf296b1e3b175d0950ac527a594610574534cd058d8026568c98a4b25d628ea
-generated: "2024-05-31T14:33:26.454253346+02:00"
+- name: jupyterhub
+  repository: https://jupyterhub.github.io/helm-chart/
+  version: 3.2.1
+digest: sha256:f77e87c16f5417c9ba3d30143451035d6b570c5eb9d736589069e31e26ab5adf
+generated: "2024-02-26T13:51:48.48639+01:00"
