@@ -6,4 +6,16 @@ nomad:
           - nomad_aitoolkit.apps:aitoolkit
   config:
     plugins:
-      options: []
+      options:
+        schemas/nomad_material_processing:
+          python_package: nomad_material_processing
+        schemas/nomad_measurements:
+          python_package: nomad_measurements
+        parsers/nomad_measurements/xrd:
+          python_package: nomad_measurements.xrd.parser
+        schemas/nomad_catalysis:
+          python_package: nomad_catalysis
+        schemas/nomad_analysis:
+          python_package: nomad_analysis
+        parsers/uv_vis_nir_transmission:
+          python_package: uv_vis_nir_transmission.parser

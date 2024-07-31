@@ -26,6 +26,14 @@ plugins = [
   "nomad-aitoolkit @ git+https://github.com/FAIRmat-NFDI/nomad-aitoolkit.git@b203f8eb28dc4b6771a39d5c5b7ad3d9d8583ac8",
   "nomad-simulations==0.0.1",
   "pynxtools[convert]==0.5.0",
+  "nomad-measurements @ git+https://github.com/FAIRmat-NFDI/nomad-measurements@main",
+  "nomad-material-processing @ git+https://github.com/FAIRmat-NFDI/nomad-material-processing@main",
+  "nomad-catalysis @ git+https://github.com/schumannj/nomad-schema-plugin-fhi-catalysis@main",
+  "nomad-analysis @ git+https://github.com/FAIRmat-NFDI/nomad-analysis@develop",
+  "nomad-unisyscat @ git+https://github.com/FAIRmat-NFDI/nomad-unisyscat-plugin.git@main",
+  "uv-vis-nir-transmission @ git+https://github.com/FAIRmat-NFDI/AreaA-data_modeling_and_schemas.git@f53390fc1a4b80fa4d9e7ebbe4516f461f54ed61#subdirectory=transmission/transmission_plugin/uv_vis_nir_transmission_plugin",
+  "nomad-tadf-molecules @ git+https://github.com/FAIRmat-NFDI/nomad-tadf-molecules@main",
+
 ]
 
 [tool.uv.pip]

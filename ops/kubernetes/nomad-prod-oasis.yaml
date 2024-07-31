@@ -1,0 +1,66 @@
+nomad:
+  config:
+    version:
+      label: oasis
+      isBeta: false
+      usesBetaData: false
+
+    gui:
+      debug: true
+
+    dbname: nomad_prod_v1_oasis
+
+    uploadurl: "https://cloud.nomad-lab.eu/prod/v1/oasis/api/uploads"
+
+    api:
+      uploadLimit: 1000
+
+    volumes:
+      prefixSize: 1
+      public: /nomad/oasis/fs/public
+      staging: /nomad/oasis/fs/staging
+      north_home: /nomad/oasis/fs/north/users
+      tmp: /nomad/oasis/fs/tmp
+      nomad: /nomad
+
+    mail:
+      enabled: false
+
+    datacite:
+      enabled: false
+
+    north:
+      enabled: true
+
+    oasis:
+      is_oasis: true
+      uses_central_user_management: true
+
+  image:
+    repository: gitlab-registry.mpcdf.mpg.de/nomad-lab/nomad-distro
+    tag: "test-oasis"
+
+  proxy:
+    path: "/prod/v1/oasis"
+
+  app:
+    replicaCount: 8
+
+  worker:
+    replicaCount: 2
+    processes: 12
+    resources:
+      limits:
+        memory: "32Gi"
+      requests:
+        memory: "8Gi"
+
+jupyterhub:
+  fullnameOverride: "nomad-prod-oasis-north"
+  hub:
+    baseUrl: "/prod/v1/oasis/north"
+    config:
+      GenericOAuthenticator:
+        oauth_callback_url: https://nomad-lab.eu/prod/v1/oasis/north/hub/oauth_callback
+  singleuser:
+    podNameTemplate: "nomad-prod-oasis-north-{username}--{servername}"

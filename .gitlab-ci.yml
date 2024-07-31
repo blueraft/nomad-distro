@@ -33,6 +33,7 @@ workflow:
       variables:
         DOCKER_TAG: ${CI_COMMIT_REF_NAME}
     - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+    - if: $CI_COMMIT_BRANCH == "test-oasis"
     - when: never
 
 stages:
@@ -65,7 +66,7 @@ update dependencies:
   after_script:
     - git remote rm gitlab_origin &> /dev/null
   rules:
-    - if: $CI_PIPELINE_SOURCE == "schedule"
+    - if: $CI_COMMIT_BRANCH == "test-oasis" && $OASIS_NIGHTLY
       when: always
       allow_failure: false
     - if: $CI_COMMIT_BRANCH == "develop" && $DEVELOP_NIGHTLY
@@ -315,6 +316,35 @@ deploy develop image:
 test develop deployment:
   stage: deploy
   needs: ["deploy develop", "deploy develop image"]
+  <<: *test_deployment
+
+deploy oasis:
+  stage: deploy
+  extends:
+    - .tag image
+  variables:
+    TARGET_ENV: oasis
+  before_script:
+    - echo "TARGET_ENV=oasis" >> build.env
+    - echo "name=oasis" >> build.env
+    - echo "deployment_tier=production" >> build.env
+    - echo "url=https://nomad-lab.eu/prod/v1/oasis" >> build.env
+  artifacts:
+    reports:
+      dotenv: build.env
+  rules:
+    - if: $CI_COMMIT_BRANCH == "test-oasis" && $OASIS_NIGHTLY
+    - when: manual
+      allow_failure: true
+
+deploy oasis image:
+  stage: deploy
+  needs: ["deploy oasis"]
+  <<: *deploy_image
+
+test oasis deployment:
+  stage: deploy
+  needs: ["deploy oasis", "deploy oasis image"]
   <<: *test_deployment
 
 release latest image:
