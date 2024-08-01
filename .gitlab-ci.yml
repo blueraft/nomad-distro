@@ -302,7 +302,8 @@ deploy develop:
     reports:
       dotenv: build.env
   rules:
-    - if: $CI_COMMIT_BRANCH == "develop" && $DEVELOP_NIGHTLY
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH && $DEVELOP_NIGHTLY
+      when: on_success
     - when: manual
       allow_failure: true
 
