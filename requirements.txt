@@ -149,7 +149,7 @@ lxml-html-clean==0.1.1    # via nomad-lab, perovskite-solar-cell-database
 m2r==0.2.1                # via nomad-lab
 mako==1.3.5               # via alembic
 markupsafe==2.1.5         # via jinja2, mako, nbconvert, werkzeug
-matid==2.0.1              # via nomad-lab, nomad-simulations
+matid==2.1.0              # via nomad-lab, nomad-simulations
 matplotlib==3.8.4         # via ase, asr, diffsims, hyperspy, kikuchipy, matplotlib-scalebar, mdanalysis, orix, phonopy, pyfai, pymatgen, pyxem, radioactivedecay
 matplotlib-inline==0.1.7  # via ipykernel, ipython
 matplotlib-scalebar==0.8.1  # via orix
@@ -178,7 +178,7 @@ nionswift-io==0.15.1      # via nionswift
 nionui==0.6.11            # via nionswift
 nionutils==0.4.10         # via niondata, nionswift, nionswift-io, nionui
 nomad-aitoolkit @ git+https://github.com/FAIRmat-NFDI/nomad-aitoolkit.git@70e6261c746e579ad0f177a965d16134efb50c35  # via nomad-distribution (pyproject.toml)
-nomad-lab==1.3.4          # via nomad-porous-materials, nomad-simulations, nomad-distribution (pyproject.toml)
+nomad-lab==1.3.5.dev59+gbc5567a07  # via nomad-porous-materials, nomad-simulations, nomad-distribution (pyproject.toml)
 nomad-openbis==1.0.0      # via nomad-lab
 nomad-porous-materials @ git+https://github.com/FAIRmat-NFDI/nomad-porous-materials.git@795a53f35ffa52604cf7971c16cc3d4f9ce80f2f  # via nomad-distribution (pyproject.toml)
 nomad-simulations==0.0.1  # via nomad-distribution (pyproject.toml)
@@ -231,6 +231,7 @@ pyedr==0.8.0              # via panedr
 pyfai==2024.5.0           # via pyxem
 pygments==2.18.0          # via ipython, jupyter-console, nbconvert, qtconsole, sphinx
 pyjwt==2.6.0              # via nomad-lab
+pylibmagic==0.5.0 ; sys_platform == 'darwin'  # via nomad-lab
 pymatgen==2023.9.25       # via asr, nomad-lab, nomad-porous-materials
 pymongo==4.6.3            # via mongoengine, nomad-lab, optimade
 pynxtools==0.5.0          # via pynxtools-apm, pynxtools-ellips, pynxtools-em, pynxtools-mpes, pynxtools-raman, pynxtools-stm, pynxtools-xps, pynxtools-xrd, nomad-distribution (pyproject.toml)
@@ -252,6 +253,7 @@ python-json-logger==2.0.2  # via jupyter-events, jupyter-telemetry, nomad-lab
 python-keycloak==4.2.0    # via nomad-lab
 python-logstash==0.4.6    # via nomad-lab
 python-magic==0.4.24      # via nomad-lab
+python-magic-bin==0.4.14 ; sys_platform == 'win32'  # via nomad-lab
 python-multipart==0.0.9   # via nomad-lab
 pytz==2024.1              # via nionswift, nomad-lab, pandas
 pywavelets==1.6.0         # via scikit-image
