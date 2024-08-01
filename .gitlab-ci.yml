@@ -68,6 +68,9 @@ update dependencies:
     - if: $CI_PIPELINE_SOURCE == "schedule"
       when: always
       allow_failure: false
+    - if: $CI_COMMIT_BRANCH == "develop" && $DEVELOP_NIGHTLY
+      when: always
+      allow_failure: false
     - when: manual
       allow_failure: true
 
@@ -299,7 +302,7 @@ deploy develop:
     reports:
       dotenv: build.env
   rules:
-    - if: $CI_COMMIT_BRANCH == "develop" && $NIGHTLY
+    - if: $CI_COMMIT_BRANCH == "develop" && $DEVELOP_NIGHTLY
     - when: manual
       allow_failure: true
 
