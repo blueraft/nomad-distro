@@ -1,6 +1,6 @@
 # Define variables
 VENV_DIR := .venv
-PYTHON_VERSION := 3.9
+PYTHON_VERSION := 3.11
 
 # Target to initialize submodules and create a Python virtual environment
 setup:
@@ -19,12 +19,19 @@ sync:
 
 # Lock python dependencies
 lock:
-	uv pip compile pyproject.toml --extra plugins -o requirements.txt -p $(PYTHON_VERSION)
+	uv pip compile -p $(PYTHON_VERSION) --python-platform linux --annotation-style=line \
+    --extra=plugins \
+    --output-file=requirements.txt \
+    pyproject.toml
+
 
 # Update dependencies and submodules
 update:
 	git submodule update --remote --merge
-	uv pip compile -U pyproject.toml --extra plugins -o requirements.txt -p $(PYTHON_VERSION)
+	uv pip compile -U -p $(PYTHON_VERSION) --python-platform linux --annotation-style=line \
+    --extra=plugins \
+    --output-file=requirements.txt \
+    pyproject.toml
 
 # Start appworker
 appworker:
