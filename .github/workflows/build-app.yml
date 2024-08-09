@@ -21,6 +21,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
+          ref: ${{ github.head_ref || github.ref_name }}
           submodules: true
 
       - uses: hynek/setup-cached-uv@v2
@@ -29,7 +30,7 @@ jobs:
         with:
           python-version: "3.11"
 
-      - name: update lock file
+      - name: Update lock file
         run: ./scripts/generate_python_dependencies.sh
 
       # Commits all changes
@@ -40,7 +41,7 @@ jobs:
           git add requirements*
           if [[ `git status --porcelain` ]]; then
             git commit -m "Update lockfile"
-            git push -o ci.skip # prevent triggering pipeline again
+            git push origin -o ci.skip # prevent triggering pipeline again
           fi
 
       - uses: docker/setup-buildx-action@v3
