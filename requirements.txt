@@ -74,7 +74,7 @@ fasteners==0.19           # via mdanalysis, zarr
 fastjsonschema==2.20.0    # via nbformat
 filelock==3.3.1           # via nomad-lab
 findiff==0.10.0           # via pynxtools-stm
-flask==3.0.3              # via asr
+flask==3.0.3              # via asr, nomad-distribution (pyproject.toml)
 flatdict==4.0.1           # via ifes-apt-tc-data-modeling, pynxtools-em
 fonttools==4.53.1         # via matplotlib
 fqdn==1.5.1               # via jsonschema
