@@ -23,7 +23,7 @@ jobs:
         with:
           submodules: true
 
-      - uses: hynek/setup-cached-uv@v1
+      - uses: hynek/setup-cached-uv@v2
 
       - run: scripts/check_python_dependencies.sh
 
