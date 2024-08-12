@@ -52,7 +52,7 @@ update dependencies:
     GIT_SUBMODULE_UPDATE_FLAGS: --jobs 4
     DOCKER_BUILDKIT: 1
   before_script:
-    - pip install --upgrade uv
+    - pip install uv==0.2.35
     - git config user.name "CI Pipeline"
     - git config user.email "cipipeline@nomad-lab.eu"
     - git remote add gitlab_origin https://oauth2:$CI_ACCESS_TOKEN@gitlab.mpcdf.mpg.de/nomad-lab/nomad-distro.git &> /dev/null
@@ -145,7 +145,7 @@ install tests:
   variables:
     UV_SYSTEM_PYTHON: true
   script:
-    - pip install uv
+    - pip install uv==0.2.35
     - uv pip install dist/nomad_*.tar.gz
     - python -c 'import nomad.cli'
     - python -c 'from nomad.client import ArchiveQuery'
@@ -160,7 +160,7 @@ check python dependencies:
     GIT_SUBMODULE_UPDATE_FLAGS: --jobs 4
     GIT_STRATEGY: clone
   before_script:
-    - pip install uv
+    - pip install uv==0.2.35
   script:
     - scripts/check_python_dependencies.sh
 
