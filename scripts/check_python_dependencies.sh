@@ -10,7 +10,7 @@ cd $project_dir
 # backup
 cp requirements.txt requirements.txt.tmp
 
-uv pip compile -q -p 3.11 --python-platform linux --annotation-style=line \
+uv pip compile -q --universal --annotation-style=line \
     --extra=plugins \
     --output-file=requirements.txt \
     pyproject.toml
