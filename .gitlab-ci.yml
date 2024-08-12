@@ -61,7 +61,7 @@ update dependencies:
     - git add requirements*
     - |
       if [[ `git status --porcelain` ]]; then
-        git commit -m "update requirements in CI" && git push gitlab_origin HEAD:main -o ci.skip # prevent triggering pipeline again
+        git commit -m "update requirements in CI" && git push gitlab_origin HEAD:${CI_COMMIT_BRANCH} -o ci.skip # prevent triggering pipeline again
       fi
   after_script:
     - git remote rm gitlab_origin &> /dev/null
@@ -85,6 +85,7 @@ build image:
     GIT_SUBMODULE_DEPTH: 1
     GIT_SUBMODULE_UPDATE_FLAGS: --jobs 4
     DOCKER_BUILDKIT: 1
+    GIT_STRATEGY: clone
   before_script:
     - echo "{\"auths\":{\"${CI_REGISTRY}\":{\"auth\":\"$(printf "%s:%s" "${CI_REGISTRY_USER}" "${CI_REGISTRY_PASSWORD}" | base64 | tr -d '\n')\"},\"$CI_DEPENDENCY_PROXY_SERVER\":{\"auth\":\"$(printf "%s:%s" ${CI_DEPENDENCY_PROXY_USER} "${CI_DEPENDENCY_PROXY_PASSWORD}" | base64 | tr -d '\n')\"}}}" > /kaniko/.docker/config.json
   script:
@@ -111,6 +112,7 @@ build python package:
     GIT_SUBMODULE_STRATEGY: recursive
     GIT_SUBMODULE_DEPTH: 1
     GIT_SUBMODULE_UPDATE_FLAGS: --jobs 4
+    GIT_STRATEGY: clone
   script:
     - python -m pip install build
     - python -m build
@@ -156,6 +158,7 @@ check python dependencies:
   variables:
     GIT_SUBMODULE_STRATEGY: recursive
     GIT_SUBMODULE_UPDATE_FLAGS: --jobs 4
+    GIT_STRATEGY: clone
   before_script:
     - pip install uv
   script:
