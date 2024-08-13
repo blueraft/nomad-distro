@@ -8,7 +8,7 @@ project_dir=$(dirname $(dirname $(realpath $0)))
 cd $project_dir
 
 
-uv pip compile --universal --annotation-style=line \
+uv pip compile --universal -p 3.11 --annotation-style=line \
     --extra=plugins \
     --output-file=requirements.txt \
     pyproject.toml
