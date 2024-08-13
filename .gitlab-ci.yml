@@ -74,6 +74,10 @@ update dependencies:
       allow_failure: false
     - when: manual
       allow_failure: true
+  artifacts:
+    paths:
+      - requirements.txt
+    expire_in: 1 hour
 
 build image:
   stage: build
