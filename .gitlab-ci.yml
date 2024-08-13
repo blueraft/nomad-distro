@@ -64,6 +64,8 @@ update dependencies:
       fi
   after_script:
     - git remote rm gitlab_origin &> /dev/null
+    - mkdir requirements_artifacts
+    - cp requirements.txt requirements_artifacts/
   rules:
     - if: $CI_PIPELINE_SOURCE == "schedule"
       when: always
@@ -73,6 +75,10 @@ update dependencies:
       allow_failure: false
     - when: manual
       allow_failure: true
+  artifacts:
+    paths:
+      - requirements_artifacts/
+    expire_in: 1 hour
 
 build image:
   stage: build
@@ -87,6 +93,7 @@ build image:
     GIT_STRATEGY: clone
   before_script:
     - echo "{\"auths\":{\"${CI_REGISTRY}\":{\"auth\":\"$(printf "%s:%s" "${CI_REGISTRY_USER}" "${CI_REGISTRY_PASSWORD}" | base64 | tr -d '\n')\"},\"$CI_DEPENDENCY_PROXY_SERVER\":{\"auth\":\"$(printf "%s:%s" ${CI_DEPENDENCY_PROXY_USER} "${CI_DEPENDENCY_PROXY_PASSWORD}" | base64 | tr -d '\n')\"}}}" > /kaniko/.docker/config.json
+    - if [ -f requirements_artifacts/requirements.txt ]; then mv requirements_artifacts/requirements.txt .; fi
   script:
     - /kaniko/executor
       --context "."
@@ -160,6 +167,7 @@ check python dependencies:
     GIT_STRATEGY: clone
   before_script:
     - pip install uv==0.2.35
+    - if [ -f requirements_artifacts/requirements.txt ]; then mv requirements_artifacts/requirements.txt .; fi
   script:
     - scripts/check_python_dependencies.sh
 
