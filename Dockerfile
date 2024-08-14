@@ -98,12 +98,6 @@ COPY pyproject.toml pyproject.toml
 # into this layer.
 RUN uv venv /opt/venv --seed && uv pip install -r requirements.txt
 
-# Reduce the size of the packages
-RUN find /opt/venv/ -type d -name 'tests' ! -path '*/networkx/*' -exec rm -r '{}' + \
- && find /opt/venv/ -type d -name 'test' -exec rm -r '{}' + \
- && find /opt/venv/ -name '*.so' ! -path '*/h5py/*' ! -path '*/quippy*/*' -print -exec sh -c 'file "{}" | grep -q "not stripped" && strip -s "{}"' \;
-
-
 COPY examples ./examples
 COPY scripts ./scripts
 
