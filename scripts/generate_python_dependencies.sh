@@ -9,6 +9,7 @@ cd $project_dir
 
 
 uv pip compile --universal -p 3.11 --annotation-style=line \
+    --upgrade-package nomad-lab \
     --extra=plugins \
     --output-file=requirements.txt \
     pyproject.toml
