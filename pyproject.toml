@@ -27,6 +27,7 @@ plugins = [
   "nomad-simulations==0.0.1",
   "pynxtools[convert]==0.5.0",
   "nomad-schema-plugin-run @ git+https://github.com/nomad-coe/nomad-schema-plugin-run.git@f5d348fec5cef89e76021b42e48ff49b1832034b",
+  "nomad-schema-plugin-simulation-workflow @ git+https://github.com/nomad-coe/nomad-schema-plugin-simulation-workflow.git@decd6bc6f7df21513c56f276dc663977c44a22b1",
 ]
 
 [tool.uv.pip]
