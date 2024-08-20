@@ -177,7 +177,7 @@ nionswift-io==15.2.1      # via nionswift
 nionui==7.1.1             # via nionswift
 nionutils==4.11.0         # via niondata, nionswift, nionswift-io, nionui
 nomad-aitoolkit @ git+https://github.com/FAIRmat-NFDI/nomad-aitoolkit.git@b203f8eb28dc4b6771a39d5c5b7ad3d9d8583ac8  # via nomad-distribution (pyproject.toml)
-nomad-lab==1.3.6.dev1+g8194c0c15  # via nomad-porous-materials, nomad-schema-plugin-run, nomad-schema-plugin-simulation-workflow, nomad-simulations, nomad-distribution (pyproject.toml)
+nomad-lab==1.3.6.dev5+g5fa39fd66  # via nomad-porous-materials, nomad-schema-plugin-run, nomad-schema-plugin-simulation-workflow, nomad-simulations, nomad-distribution (pyproject.toml)
 nomad-openbis==1.0.0      # via nomad-lab
 nomad-porous-materials @ git+https://github.com/FAIRmat-NFDI/nomad-porous-materials.git@795a53f35ffa52604cf7971c16cc3d4f9ce80f2f  # via nomad-distribution (pyproject.toml)
 nomad-schema-plugin-run @ git+https://github.com/nomad-coe/nomad-schema-plugin-run.git@f5d348fec5cef89e76021b42e48ff49b1832034b  # via nomad-schema-plugin-simulation-workflow, nomad-distribution (pyproject.toml)
