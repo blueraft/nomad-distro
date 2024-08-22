@@ -175,7 +175,7 @@ nionswift-io==15.2.1      # via nionswift
 nionui==7.1.1             # via nionswift
 nionutils==4.11.0         # via niondata, nionswift, nionswift-io, nionui
 nomad-aitoolkit @ git+https://github.com/FAIRmat-NFDI/nomad-aitoolkit.git@b203f8eb28dc4b6771a39d5c5b7ad3d9d8583ac8  # via nomad-distribution (pyproject.toml)
-nomad-lab==1.3.6.dev19+gc04019017  # via nomad-normalizer-plugin-bandstructure, nomad-normalizer-plugin-dos, nomad-normalizer-plugin-simulation-workflow, nomad-normalizer-plugin-soap, nomad-normalizer-plugin-spectra, nomad-normalizer-plugin-system, nomad-porous-materials, nomad-schema-plugin-run, nomad-schema-plugin-simulation-workflow, nomad-simulations, nomad-distribution (pyproject.toml)
+nomad-lab==1.3.6.dev25+g3637965b8  # via nomad-normalizer-plugin-bandstructure, nomad-normalizer-plugin-dos, nomad-normalizer-plugin-simulation-workflow, nomad-normalizer-plugin-soap, nomad-normalizer-plugin-spectra, nomad-normalizer-plugin-system, nomad-porous-materials, nomad-schema-plugin-run, nomad-schema-plugin-simulation-workflow, nomad-simulations, nomad-distribution (pyproject.toml)
 nomad-normalizer-plugin-bandstructure @ git+https://github.com/nomad-coe/nomad-normalizer-plugin-bandstructure.git@6521a2bba848db8891a02576262eba8dcd4d9374  # via nomad-distribution (pyproject.toml)
 nomad-normalizer-plugin-dos @ git+https://github.com/nomad-coe/nomad-normalizer-plugin-dos.git@dad7e2b6e74bcedc73a4d86604e4beafd336c8b8  # via nomad-distribution (pyproject.toml)
 nomad-normalizer-plugin-simulation-workflow @ git+https://github.com/nomad-coe/nomad-normalizer-plugin-simulation-workflow.git@22af484c9ff6ff0d6c26be0bac9c66fa64200235  # via nomad-distribution (pyproject.toml)
