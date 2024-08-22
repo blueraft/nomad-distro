@@ -25,7 +25,6 @@ bagit==1.8.1              # via nomad-lab
 basicauth==0.4.1          # via nomad-lab
 beautifulsoup4==4.12.3    # via nbconvert, nomad-lab
 billiard==4.2.0           # via celery
-biopython==1.84           # via mdanalysis
 bitarray==2.9.2           # via nomad-lab
 bleach==6.1.0             # via nbconvert
 blinker==1.8.2            # via flask
@@ -84,7 +83,6 @@ gitdb==4.0.11             # via gitpython
 gitpython==3.1.43         # via nomad-lab
 greenlet==3.0.3 ; (python_full_version < '3.13' and platform_machine == 'AMD64') or (python_full_version < '3.13' and platform_machine == 'WIN32') or (python_full_version < '3.13' and platform_machine == 'aarch64') or (python_full_version < '3.13' and platform_machine == 'amd64') or (python_full_version < '3.13' and platform_machine == 'ppc64le') or (python_full_version < '3.13' and platform_machine == 'win32') or (python_full_version < '3.13' and platform_machine == 'x86_64')  # via sqlalchemy
 griddataformats==1.0.2    # via mdanalysis
-gsd==3.3.0                # via mdanalysis
 gunicorn==21.2.0          # via nomad-lab
 h11==0.14.0               # via httpcore, uvicorn
 h5grove==1.3.0            # via jupyterlab-h5web, nomad-lab
@@ -152,8 +150,8 @@ matid==2.1.0              # via nomad-lab, nomad-simulations
 matplotlib==3.9.1.post1   # via ase, asr, diffsims, hyperspy, kikuchipy, matplotlib-scalebar, mdanalysis, orix, phonopy, pyfai, pymatgen, pyxem, radioactivedecay
 matplotlib-inline==0.1.7  # via ipykernel, ipython
 matplotlib-scalebar==0.8.1  # via orix
-mda-xdrlib==0.2.0         # via pyedr
-mdanalysis==2.5.0         # via nomad-lab
+mda-xdrlib==0.2.0         # via mdanalysis, pyedr
+mdanalysis==2.7.0         # via nomad-lab
 mergedeep==1.3.4          # via pynxtools
 mistune==3.0.2            # via m2r, nbconvert
 mmtf-python==1.1.3        # via mdanalysis
@@ -170,24 +168,24 @@ nbformat==5.10.4          # via jupyter-server, nbclient, nbconvert
 ndindex==1.8              # via blosc2
 nest-asyncio==1.6.0       # via ipykernel
 netcdf4==1.6.5            # via nomad-lab
-networkx==3.3             # via matid, mdanalysis, nomad-lab, pymatgen, radioactivedecay, scikit-image
+networkx==3.3             # via matid, nomad-lab, pymatgen, radioactivedecay, scikit-image
 niondata==15.6.3          # via nionswift, nionswift-io
 nionswift==16.11.0        # via pynxtools-em
 nionswift-io==15.2.1      # via nionswift
 nionui==7.1.1             # via nionswift
 nionutils==4.11.0         # via niondata, nionswift, nionswift-io, nionui
 nomad-aitoolkit @ git+https://github.com/FAIRmat-NFDI/nomad-aitoolkit.git@b203f8eb28dc4b6771a39d5c5b7ad3d9d8583ac8  # via nomad-distribution (pyproject.toml)
-nomad-lab==1.3.6.dev5+g5fa39fd66  # via nomad-normalizer-plugin-bandstructure, nomad-normalizer-plugin-dos, nomad-normalizer-plugin-simulation-workflow, nomad-normalizer-plugin-soap, nomad-normalizer-plugin-spectra, nomad-normalizer-plugin-system, nomad-porous-materials, nomad-schema-plugin-run, nomad-schema-plugin-simulation-workflow, nomad-simulations, nomad-distribution (pyproject.toml)
-nomad-normalizer-plugin-bandstructure @ git+https://github.com/nomad-coe/nomad-normalizer-plugin-bandstructure.git@669f2c899bc4013975b1b38ca8af630fe2e8a930  # via nomad-distribution (pyproject.toml)
-nomad-normalizer-plugin-dos @ git+https://github.com/nomad-coe/nomad-normalizer-plugin-dos.git@90c92ba6d520df52fe73a571ebd103f36e9975a8  # via nomad-distribution (pyproject.toml)
+nomad-lab==1.3.6.dev19+gc04019017  # via nomad-normalizer-plugin-bandstructure, nomad-normalizer-plugin-dos, nomad-normalizer-plugin-simulation-workflow, nomad-normalizer-plugin-soap, nomad-normalizer-plugin-spectra, nomad-normalizer-plugin-system, nomad-porous-materials, nomad-schema-plugin-run, nomad-schema-plugin-simulation-workflow, nomad-simulations, nomad-distribution (pyproject.toml)
+nomad-normalizer-plugin-bandstructure @ git+https://github.com/nomad-coe/nomad-normalizer-plugin-bandstructure.git@6521a2bba848db8891a02576262eba8dcd4d9374  # via nomad-distribution (pyproject.toml)
+nomad-normalizer-plugin-dos @ git+https://github.com/nomad-coe/nomad-normalizer-plugin-dos.git@dad7e2b6e74bcedc73a4d86604e4beafd336c8b8  # via nomad-distribution (pyproject.toml)
 nomad-normalizer-plugin-simulation-workflow @ git+https://github.com/nomad-coe/nomad-normalizer-plugin-simulation-workflow.git@22af484c9ff6ff0d6c26be0bac9c66fa64200235  # via nomad-distribution (pyproject.toml)
-nomad-normalizer-plugin-soap @ git+https://github.com/nomad-coe/nomad-normalizer-plugin-soap.git@898416e70b8bb26d87a7a5b0644f831beec4f631  # via nomad-distribution (pyproject.toml)
-nomad-normalizer-plugin-spectra @ git+https://github.com/nomad-coe/nomad-normalizer-plugin-spectra.git@04ecd6544afc3dc6e88e60a25152a125f0c6a5ed  # via nomad-distribution (pyproject.toml)
-nomad-normalizer-plugin-system @ git+https://github.com/nomad-coe/nomad-normalizer-plugin-system.git@c849c947707f617e434e3ac95249ab33a90b9415  # via nomad-distribution (pyproject.toml)
+nomad-normalizer-plugin-soap @ git+https://github.com/nomad-coe/nomad-normalizer-plugin-soap.git@1b0e60e6bb7a75b9d7b53d6b077adf5aec7ec952  # via nomad-distribution (pyproject.toml)
+nomad-normalizer-plugin-spectra @ git+https://github.com/nomad-coe/nomad-normalizer-plugin-spectra.git@ec147326b3485ca9c324aca8a8dea520eb01e7dc  # via nomad-distribution (pyproject.toml)
+nomad-normalizer-plugin-system @ git+https://github.com/nomad-coe/nomad-normalizer-plugin-system.git@01523ddbc85676a40af40f4747f5f13676f34c0f  # via nomad-distribution (pyproject.toml)
 nomad-openbis==1.0.0      # via nomad-lab
 nomad-porous-materials @ git+https://github.com/FAIRmat-NFDI/nomad-porous-materials.git@795a53f35ffa52604cf7971c16cc3d4f9ce80f2f  # via nomad-distribution (pyproject.toml)
-nomad-schema-plugin-run @ git+https://github.com/nomad-coe/nomad-schema-plugin-run.git@169029274e282a54df3292f6aa0d7bfbeb95ef9c  # via nomad-schema-plugin-simulation-workflow, nomad-distribution (pyproject.toml)
-nomad-schema-plugin-simulation-workflow @ git+https://github.com/nomad-coe/nomad-schema-plugin-simulation-workflow.git@ada9074f8362f8afa331ddc2433994af0ff93ee2  # via nomad-normalizer-plugin-simulation-workflow, nomad-distribution (pyproject.toml)
+nomad-schema-plugin-run @ git+https://github.com/nomad-coe/nomad-schema-plugin-run.git@92d120dc4c5f7f4bcd94990ed009f8ac0019acec  # via nomad-schema-plugin-simulation-workflow, nomad-distribution (pyproject.toml)
+nomad-schema-plugin-simulation-workflow @ git+https://github.com/nomad-coe/nomad-schema-plugin-simulation-workflow.git@c9bd20c0447aaf22a6477cb39bdf03dea4c597f8  # via nomad-normalizer-plugin-simulation-workflow, nomad-distribution (pyproject.toml)
 nomad-simulations==0.0.1  # via nomad-distribution (pyproject.toml)
 notebook==7.1.3           # via jupyter
 notebook-shim==0.2.4      # via jupyterlab, notebook
@@ -195,7 +193,7 @@ nptyping==1.4.4           # via nomad-lab
 numba==0.60.0             # via diffsims, hyperspy, kikuchipy, orix, pyxem, sparse
 numcodecs==0.13.0 ; platform_machine == 'AMD64' or platform_machine == 'x86_64'  # via zarr
 numexpr==2.10.1           # via blosc2, hyperspy, pyfai, pyxem, tables
-numpy==1.26.4             # via ase, biopython, blosc2, cftime, contourpy, dask, diffsims, fabio, findiff, griddataformats, gsd, h5grove, h5py, hyperspy, ifes-apt-tc-data-modeling, igor2, imageio, kikuchipy, lmfit, matid, matplotlib, mdanalysis, mrcfile, netcdf4, niondata, nionswift, nionswift-io, nionui, nomad-lab, nptyping, numba, numcodecs, numexpr, numpy-quaternion, orix, pandas, phonopy, pycifrw, pyedr, pyfai, pymatgen, pynxtools, pynxtools-xps, pyxem, radioactivedecay, rdkit, rosettasciio, scikit-image, scikit-learn, scipy, silx, sparse, spglib, tables, tifffile, transforms3d, xarray, xraydb, zarr
+numpy==1.26.4             # via ase, blosc2, cftime, contourpy, dask, diffsims, fabio, findiff, griddataformats, h5grove, h5py, hyperspy, ifes-apt-tc-data-modeling, igor2, imageio, kikuchipy, lmfit, matid, matplotlib, mdanalysis, mrcfile, netcdf4, niondata, nionswift, nionswift-io, nionui, nomad-lab, nptyping, numba, numcodecs, numexpr, numpy-quaternion, orix, pandas, phonopy, pycifrw, pyedr, pyfai, pymatgen, pynxtools, pynxtools-xps, pyxem, radioactivedecay, rdkit, rosettasciio, scikit-image, scikit-learn, scipy, silx, sparse, spglib, tables, tifffile, transforms3d, xarray, xraydb, zarr
 numpy-quaternion==2023.0.4  # via orix
 oauthenticator==15.1.0    # via nomad-lab
 oauthlib==3.2.2           # via jupyterhub
@@ -206,7 +204,7 @@ orjson==3.10.7            # via h5grove, nomad-lab
 packaging==24.1           # via dask, deprecation, gunicorn, hyperspy, ipykernel, jupyter-server, jupyterhub, jupyterlab, jupyterlab-server, lazy-loader, matplotlib, mdanalysis, mongomock, nbconvert, pint, plotly, pooch, qtconsole, qtpy, scikit-image, silx, sphinx, tables, xarray, xraydb
 palettable==3.3.3         # via pymatgen
 pamela==1.2.0 ; sys_platform != 'win32'  # via jupyterhub
-pandas==1.5.3             # via ifes-apt-tc-data-modeling, nomad-lab, nomad-openbis, panedr, pymatgen, pynxtools, radioactivedecay, xarray
+pandas==2.2.2             # via ifes-apt-tc-data-modeling, nomad-lab, nomad-openbis, panedr, pymatgen, pynxtools, radioactivedecay, xarray
 pandocfilters==1.5.1      # via nbconvert
 panedr==0.8.0             # via nomad-lab
 parmed==4.2.2             # via nomad-lab
@@ -328,7 +326,7 @@ transforms3d==0.4.2       # via diffsims, pyxem
 types-python-dateutil==2.9.0.20240316  # via arrow
 typing-extensions==4.12.2  # via alembic, fastapi, jwcrypto, pydantic, sqlalchemy
 typish==1.9.3             # via nptyping
-tzdata==2024.1            # via celery, tzlocal
+tzdata==2024.1            # via celery, pandas, tzlocal
 tzlocal==5.2              # via nionswift, pynxtools-em
 uncertainties==3.2.2      # via lmfit, pymatgen
 unidecode==1.3.2          # via nomad-lab
