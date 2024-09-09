@@ -31,7 +31,6 @@ RUN apt-get update \
        && npm install -g configurable-http-proxy@^4.2.0 \
        # clean cache and logs
        && rm -rf /var/lib/apt/lists/* /var/log/* /var/tmp/* ~/.npm
- 
 
 # Activate the virtualenv in the container
 # See here for more information:
@@ -85,17 +84,10 @@ RUN apt-get update \
  && rm -rf /var/lib/apt/lists/*
 
 # Install UV
-RUN curl -LsSf https://astral.sh/uv/install.sh | sh
-ENV PATH="/root/.cargo/bin/:$PATH"
+COPY --from=ghcr.io/astral-sh/uv:latest /uv /bin/uv
 
-ENV UV_NO_CACHE=1
+COPY requirements.txt pyproject.toml ./
 
-COPY requirements.txt requirements.txt
-COPY pyproject.toml pyproject.toml
-# Download dependencies as a separate step to take advantage of Docker's caching.
-# Leverage a cache mount to /root/.cache/uv to speed up subsequent builds.
-# Leverage a bind mount to requirements to avoid having to copy them into
-# into this layer.
 RUN uv venv /opt/venv --seed && uv pip install -r requirements.txt
 
 COPY examples ./examples
@@ -121,3 +113,32 @@ EXPOSE 8000
 EXPOSE 9000
 
 VOLUME /app/.volumes/fs
+
+
+FROM jupyter/datascience-notebook:lab-3.6.2 as jupyter
+
+# Fix: https://github.com/hadolint/hadolint/wiki/DL4006
+# Fix: https://github.com/koalaman/shellcheck/wiki/SC3014
+SHELL ["/bin/bash", "-o", "pipefail", "-c"]
+
+USER root
+
+RUN apt update \
+ && apt install --yes --quiet --no-install-recommends \
+        libmagic-dev \
+ && rm -rf /var/lib/apt/lists/*
+
+
+# Switch back to jovyan to avoid accidental container runs as root
+USER ${NB_UID}
+WORKDIR "${HOME}"
+
+COPY --from=ghcr.io/astral-sh/uv:latest /uv /bin/uv
+
+COPY requirements.txt pyproject.toml ./
+
+RUN uv pip install -r requirements.txt --system
+
+# Get rid ot the following message when you open a terminal in jupyterlab:
+# groups: cannot find name for group ID 11320
+RUN touch ${HOME}/.hushlogin
