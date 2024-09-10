@@ -52,11 +52,17 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Extract Docker metadata
-        id: meta
+      - name: Extract Docker nomad app metadata
+        id: nomad-meta
         uses: docker/metadata-action@v5
         with:
           images: ${{ env.REGISTRY }}/${{ github.repository }}-app
+
+      - name: Extract Docker jupyter metadata
+        id: jupyter-meta
+        uses: docker/metadata-action@v5
+        with:
+          images: ${{ env.REGISTRY }}/${{ github.repository }}-jupyter
 
       - name: "Build and push Docker nomad image"
         uses: docker/build-push-action@v5
@@ -67,8 +73,8 @@ jobs:
           cache-to: type=gha,mode=max
           target: final
           push: ${{ github.event_name != 'pull_request' }}
-          tags: ${{ steps.meta.outputs.tags }}
-          labels: ${{ steps.meta.outputs.labels }}
+          tags: ${{ steps.nomad-meta.outputs.tags }}
+          labels: ${{ steps.nomad-meta.outputs.labels }}
 
       - name: "Build and push Docker jupyter image"
         uses: docker/build-push-action@v5
@@ -79,5 +85,5 @@ jobs:
           cache-to: type=gha,mode=max
           target: jupyter
           push: ${{ github.event_name != 'pull_request' }}
-          tags: ${{ steps.meta.outputs.tags }}
-          labels: ${{ steps.meta.outputs.labels }}
+          tags: ${{ steps.jupyter-meta.outputs.tags }}
+          labels: ${{ steps.jupyter-meta.outputs.labels }}
