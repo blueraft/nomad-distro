@@ -120,6 +120,36 @@ build python package:
   rules:
     - when: on_success
 
+python test:
+  image: ghcr.io/astral-sh/uv:$UV_VERSION-python$PYTHON_VERSION-bookworm
+  stage: test
+  services:
+    - name: rabbitmq:3.11.5
+      alias: rabbitmq
+    - name: docker.elastic.co/elasticsearch/elasticsearch:7.17.1
+      alias: elastic
+      command:
+        - bash
+        - "-c"
+        - ES_JAVA_OPTS="-Xms512m -Xmx512m" docker-entrypoint.sh elasticsearch -Ediscovery.type=single-node -Expack.security.enabled=false
+    - name: mongo:5.0.6
+      alias: mongo
+  variables:
+    UV_SYSTEM_PYTHON: true
+    RABBITMQ_ERLANG_COOKIE: SWQOKODSQALRPCLNMEQG
+    RABBITMQ_DEFAULT_USER: rabbitmq
+    RABBITMQ_DEFAULT_PASS: rabbitmq
+    RABBITMQ_DEFAULT_VHOST: /
+    NOMAD_RABBITMQ_HOST: rabbitmq
+    NOMAD_ELASTIC_HOST: elastic
+    NOMAD_MONGO_HOST: mongo
+    NOMAD_KEYCLOAK_PASSWORD: ${CI_KEYCLOAK_ADMIN_PASSWORD}
+    NOMAD_NORMALIZE_SPRINGER_DB_PATH: /nomad/fairdi/db/data/springer.msg
+  before_script:
+    - uv pip install -e ".[dev]"
+  script:
+    - python -m pytest -sv tests
+
 check helm chart:
   stage: test
   image: ${CI_REGISTRY_IMAGE}:${DOCKER_TAG}

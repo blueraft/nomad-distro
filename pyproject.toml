@@ -41,8 +41,12 @@ plugins = [
   "eelsdbconverter @ git+https://github.com/nomad-coe/nomad-parser-eelsdb.git@entry-point",
 ]
 
-[tool.uv.pip]
-index-url = "https://gitlab.mpcdf.mpg.de/api/v4/projects/2187/packages/pypi/simple"
+dev = ["nomad-lab[parsing, infrastructure, dev]>=1.3.4"]
+
+[tool.uv]
+extra-index-url = [
+  "https://gitlab.mpcdf.mpg.de/api/v4/projects/2187/packages/pypi/simple",
+]
 
 [tool.setuptools.packages.find]
 exclude = ["gui*", "docs*", "config*"]

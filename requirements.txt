@@ -19,7 +19,7 @@ asttokens==2.4.1          # via stack-data
 async-generator==1.10     # via jupyterhub
 async-lru==2.0.4          # via jupyterlab
 async-property==0.2.2     # via python-keycloak
-atomisticparsers @ git+https://github.com/nomad-coe/atomistic-parsers.git@eebca28ebe83b3c945e922910b18a16ec36e8122  # via nomad-distribution (pyproject.toml)
+atomisticparsers @ git+https://github.com/nomad-coe/atomistic-parsers.git@52080e68b284279dcfdbc7980f3874b46a61c0af  # via nomad-distribution (pyproject.toml)
 attrs==24.2.0             # via jsonschema
 babel==2.16.0             # via jupyterlab-server, sphinx
 bagit==1.8.1              # via nomad-lab
@@ -66,7 +66,7 @@ docutils==0.21.2          # via m2r, recommonmark, sphinx
 eelsdbconverter @ git+https://github.com/nomad-coe/nomad-parser-eelsdb.git@788eb03dc71ef9b164e2a5ccb9c0209b546f5c38  # via nomad-distribution (pyproject.toml)
 elasticsearch==7.17.1     # via elasticsearch-dsl, nomad-lab
 elasticsearch-dsl==7.4.0  # via nomad-lab
-electronicparsers @ git+https://github.com/nomad-coe/electronic-parsers.git@8d4ba60e1893afad1ad43df1bf0a0911f17bffc0  # via nomad-distribution (pyproject.toml)
+electronicparsers @ git+https://github.com/nomad-coe/electronic-parsers.git@807b9fceaa079c1cc787658585f576d57d548e3e  # via nomad-distribution (pyproject.toml)
 email-validator==1.3.1    # via optimade
 entrypoints==0.4          # via ipyparallel
 escapism==1.0.1           # via dockerspawner
@@ -189,8 +189,8 @@ nomad-normalizer-plugin-spectra @ git+https://github.com/nomad-coe/nomad-normali
 nomad-normalizer-plugin-system @ git+https://github.com/nomad-coe/nomad-normalizer-plugin-system.git@01523ddbc85676a40af40f4747f5f13676f34c0f  # via nomad-distribution (pyproject.toml)
 nomad-openbis==1.0.0      # via nomad-lab
 nomad-porous-materials @ git+https://github.com/FAIRmat-NFDI/nomad-porous-materials.git@522f4a3208077f534f1c5e886527ee2104283d0b  # via nomad-distribution (pyproject.toml)
-nomad-schema-plugin-run @ git+https://github.com/nomad-coe/nomad-schema-plugin-run.git@92d120dc4c5f7f4bcd94990ed009f8ac0019acec  # via atomisticparsers, databaseparsers, electronicparsers, nomad-schema-plugin-simulation-workflow, simulationparsers, workflowparsers, nomad-distribution (pyproject.toml)
-nomad-schema-plugin-simulation-workflow @ git+https://github.com/nomad-coe/nomad-schema-plugin-simulation-workflow.git@5631278b983072a6e7cb6fea40c4b3ca49b7b804  # via atomisticparsers, databaseparsers, electronicparsers, nomad-normalizer-plugin-simulation-workflow, workflowparsers, nomad-distribution (pyproject.toml)
+nomad-schema-plugin-run @ git+https://github.com/nomad-coe/nomad-schema-plugin-run.git@439a61c8edf01606af6d56dfe22e99d37eced127  # via atomisticparsers, databaseparsers, electronicparsers, nomad-schema-plugin-simulation-workflow, simulationparsers, workflowparsers, nomad-distribution (pyproject.toml)
+nomad-schema-plugin-simulation-workflow @ git+https://github.com/nomad-coe/nomad-schema-plugin-simulation-workflow.git@cfc98d52fd814200beaed75abb6c01de9c0bada5  # via atomisticparsers, databaseparsers, electronicparsers, nomad-normalizer-plugin-simulation-workflow, workflowparsers, nomad-distribution (pyproject.toml)
 nomad-simulations==0.0.1  # via nomad-distribution (pyproject.toml)
 notebook==7.1.3           # via jupyter
 notebook-shim==0.2.4      # via jupyterlab, notebook
@@ -350,7 +350,7 @@ websocket-client==1.8.0   # via jupyter-server
 websockets==12.0          # via uvicorn
 werkzeug==3.0.4           # via flask
 widgetsnbextension==4.0.11  # via ipywidgets
-workflowparsers @ git+https://github.com/nomad-coe/workflow-parsers.git@cb33c02468b1c38e9f94fd05a3180c121531902b  # via nomad-distribution (pyproject.toml)
+workflowparsers @ git+https://github.com/nomad-coe/workflow-parsers.git@d903cf5f93a7ad2edcc2f6071246c50d498dd50e  # via nomad-distribution (pyproject.toml)
 wrapt==1.16.0             # via nomad-lab
 xarray==2024.3.0          # via nomad-lab, pynxtools, pynxtools-mpes, pynxtools-xps, workflowparsers
 xmltodict==0.13.0         # via ifes-apt-tc-data-modeling, pynxtools-em
