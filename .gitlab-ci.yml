@@ -93,6 +93,7 @@ build image:
   script:
     - /kaniko/executor
       --context "."
+      --target "final"
       --dockerfile "Dockerfile"
       --destination "${CI_REGISTRY_IMAGE}:${DOCKER_TAG}"
       --cache-repo "${CI_REGISTRY_IMAGE}/cache"
