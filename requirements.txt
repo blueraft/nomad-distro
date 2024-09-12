@@ -13,20 +13,19 @@ arrow==1.3.0              # via isoduration
 asciitree==0.3.3 ; platform_machine == 'AMD64' or platform_machine == 'x86_64'  # via zarr
 ase==3.22.1               # via asr, ifes-apt-tc-data-modeling, matid, nomad-lab, nomad-porous-materials, pynxtools
 asgiref==3.8.1            # via nomad-lab
-asr==0.4.1                # via workflowparsers
+asr==0.4.1                # via nomad-parser-plugins-workflow
 asteval==1.0.2            # via lmfit
 asttokens==2.4.1          # via stack-data
 async-generator==1.10     # via jupyterhub
 async-lru==2.0.4          # via jupyterlab
 async-property==0.2.2     # via python-keycloak
-atomisticparsers @ git+https://github.com/nomad-coe/atomistic-parsers.git@52080e68b284279dcfdbc7980f3874b46a61c0af  # via nomad-distribution (pyproject.toml)
 attrs==24.2.0             # via jsonschema
 babel==2.16.0             # via jupyterlab-server, sphinx
 bagit==1.8.1              # via nomad-lab
 basicauth==0.4.1          # via nomad-lab
 beautifulsoup4==4.12.3    # via nbconvert, nomad-lab
 billiard==4.2.0           # via celery
-bitarray==2.9.2           # via nomad-dos-fingerprints, nomad-lab
+bitarray==2.9.2           # via nomad-lab
 bleach==6.1.0             # via nbconvert
 blinker==1.8.2            # via flask
 blosc2==2.7.1             # via tables
@@ -50,7 +49,6 @@ contourpy==1.2.1          # via matplotlib
 cryptography==43.0.0      # via jwcrypto, pyjwt, pyopenssl, rfc3161ng
 cycler==0.12.1            # via matplotlib
 dask==2024.8.0            # via hyperspy, kikuchipy, orix, pyxem, rosettasciio
-databaseparsers @ git+https://github.com/nomad-coe/database-parsers.git@defb8c2604e55d9421e8dcc03e86f06752920874  # via nomad-distribution (pyproject.toml)
 debugpy==1.8.5            # via ipykernel
 decorator==5.1.1          # via ipyparallel, ipython, validators
 defusedxml==0.7.1         # via nbconvert
@@ -66,7 +64,6 @@ docutils==0.21.2          # via m2r, recommonmark, sphinx
 eelsdbconverter @ git+https://github.com/nomad-coe/nomad-parser-eelsdb.git@788eb03dc71ef9b164e2a5ccb9c0209b546f5c38  # via nomad-distribution (pyproject.toml)
 elasticsearch==7.17.1     # via elasticsearch-dsl, nomad-lab
 elasticsearch-dsl==7.4.0  # via nomad-lab
-electronicparsers @ git+https://github.com/nomad-coe/electronic-parsers.git@807b9fceaa079c1cc787658585f576d57d548e3e  # via nomad-distribution (pyproject.toml)
 email-validator==1.3.1    # via optimade
 entrypoints==0.4          # via ipyparallel
 escapism==1.0.1           # via dockerspawner
@@ -90,7 +87,7 @@ griddataformats==1.0.2    # via mdanalysis
 gunicorn==21.2.0          # via nomad-lab
 h11==0.14.0               # via httpcore, uvicorn
 h5grove==1.3.0            # via jupyterlab-h5web, nomad-lab
-h5py==3.11.0              # via electronicparsers, fabio, h5grove, hdf5plugin, hyperspy, ifes-apt-tc-data-modeling, jupyterlab-h5web, kikuchipy, nionswift, nomad-lab, orix, phonopy, pyfai, pynxtools, pynxtools-mpes, pynxtools-xps, pyxem, silx, workflowparsers
+h5py==3.11.0              # via fabio, h5grove, hdf5plugin, hyperspy, ifes-apt-tc-data-modeling, jupyterlab-h5web, kikuchipy, nionswift, nomad-lab, nomad-parser-plugins-electronic, nomad-parser-plugins-workflow, orix, phonopy, pyfai, pynxtools, pynxtools-mpes, pynxtools-xps, pyxem, silx
 hdf5plugin==4.4.0         # via fabio
 hjson==3.1.0              # via nomad-lab
 html5lib==1.1             # via nomad-lab
@@ -145,7 +142,7 @@ lazy-loader==0.4          # via scikit-image
 llvmlite==0.43.0          # via numba
 lmfit==1.3.2              # via pyxem
 locket==1.0.0             # via partd
-lxml==5.2.2               # via atomisticparsers, electronicparsers, fabio, lxml-html-clean, nomad-lab, pynxtools, workflowparsers
+lxml==5.2.2               # via fabio, lxml-html-clean, nomad-lab, nomad-parser-plugins-atomistic, nomad-parser-plugins-electronic, nomad-parser-plugins-workflow, pynxtools
 lxml-html-clean==0.2.0    # via nomad-lab, perovskite-solar-cell-database
 m2r==0.2.1                # via nomad-lab
 mako==1.3.5               # via alembic
@@ -155,7 +152,7 @@ matplotlib==3.9.1.post1   # via ase, asr, diffsims, hyperspy, kikuchipy, matplot
 matplotlib-inline==0.1.7  # via ipykernel, ipython
 matplotlib-scalebar==0.8.1  # via orix
 mda-xdrlib==0.2.0         # via mdanalysis, pyedr
-mdanalysis==2.7.0         # via atomisticparsers, nomad-schema-plugin-simulation-workflow
+mdanalysis==2.7.0         # via nomad-parser-plugins-atomistic, nomad-schema-plugin-simulation-workflow
 mergedeep==1.3.4          # via pynxtools
 mistune==3.0.2            # via m2r, nbconvert
 mmtf-python==1.1.3        # via mdanalysis
@@ -171,7 +168,7 @@ nbconvert==7.16.4         # via jupyter, jupyter-server
 nbformat==5.10.4          # via jupyter-server, nbclient, nbconvert
 ndindex==1.8              # via blosc2
 nest-asyncio==1.6.0       # via ipykernel
-netcdf4==1.6.5            # via electronicparsers, nomad-lab
+netcdf4==1.6.5            # via nomad-lab, nomad-parser-plugins-electronic
 networkx==3.3             # via matid, nomad-schema-plugin-simulation-workflow, pymatgen, radioactivedecay, scikit-image
 niondata==15.6.3          # via nionswift, nionswift-io
 nionswift==16.11.0        # via pynxtools-em
@@ -179,18 +176,23 @@ nionswift-io==15.2.1      # via nionswift
 nionui==7.1.1             # via nionswift
 nionutils==4.11.0         # via niondata, nionswift, nionswift-io, nionui
 nomad-aitoolkit @ git+https://github.com/FAIRmat-NFDI/nomad-aitoolkit.git@b203f8eb28dc4b6771a39d5c5b7ad3d9d8583ac8  # via nomad-distribution (pyproject.toml)
-nomad-dos-fingerprints @ git+https://gitlab.mpcdf.mpg.de/nomad-lab/nomad-dos-fingerprints@6e8720a1c02cb553adfaeb5b0d81b5037dbd8054  # via nomad-normalizer-plugin-dos
-nomad-lab==1.3.7.dev45+gd06c39d4a  # via atomisticparsers, databaseparsers, eelsdbconverter, electronicparsers, nomad-normalizer-plugin-bandstructure, nomad-normalizer-plugin-dos, nomad-normalizer-plugin-simulation-workflow, nomad-normalizer-plugin-soap, nomad-normalizer-plugin-spectra, nomad-normalizer-plugin-system, nomad-porous-materials, nomad-schema-plugin-run, nomad-schema-plugin-simulation-workflow, nomad-simulations, simulationparsers, workflowparsers, nomad-distribution (pyproject.toml)
-nomad-normalizer-plugin-bandstructure @ git+https://github.com/nomad-coe/nomad-normalizer-plugin-bandstructure.git@6521a2bba848db8891a02576262eba8dcd4d9374  # via nomad-distribution (pyproject.toml)
-nomad-normalizer-plugin-dos @ git+https://github.com/nomad-coe/nomad-normalizer-plugin-dos.git@30dcfd0797d8197d933e215cb15857d26a53b918  # via nomad-distribution (pyproject.toml)
-nomad-normalizer-plugin-simulation-workflow @ git+https://github.com/nomad-coe/nomad-normalizer-plugin-simulation-workflow.git@22af484c9ff6ff0d6c26be0bac9c66fa64200235  # via nomad-distribution (pyproject.toml)
-nomad-normalizer-plugin-soap @ git+https://github.com/nomad-coe/nomad-normalizer-plugin-soap.git@1b0e60e6bb7a75b9d7b53d6b077adf5aec7ec952  # via nomad-distribution (pyproject.toml)
-nomad-normalizer-plugin-spectra @ git+https://github.com/nomad-coe/nomad-normalizer-plugin-spectra.git@ec147326b3485ca9c324aca8a8dea520eb01e7dc  # via nomad-distribution (pyproject.toml)
-nomad-normalizer-plugin-system @ git+https://github.com/nomad-coe/nomad-normalizer-plugin-system.git@01523ddbc85676a40af40f4747f5f13676f34c0f  # via nomad-distribution (pyproject.toml)
+nomad-dos-fingerprints==1.0.2  # via nomad-normalizer-plugin-dos
+nomad-lab==1.3.7.dev45+gd06c39d4a  # via eelsdbconverter, nomad-dos-fingerprints, nomad-normalizer-plugin-bandstructure, nomad-normalizer-plugin-dos, nomad-normalizer-plugin-simulation-workflow, nomad-normalizer-plugin-soap, nomad-normalizer-plugin-spectra, nomad-normalizer-plugin-system, nomad-parser-plugins-atomistic, nomad-parser-plugins-database, nomad-parser-plugins-electronic, nomad-parser-plugins-simulation, nomad-parser-plugins-workflow, nomad-porous-materials, nomad-schema-plugin-run, nomad-schema-plugin-simulation-workflow, nomad-simulations, nomad-distribution (pyproject.toml)
+nomad-normalizer-plugin-bandstructure==1.0  # via nomad-distribution (pyproject.toml)
+nomad-normalizer-plugin-dos==1.0  # via nomad-distribution (pyproject.toml)
+nomad-normalizer-plugin-simulation-workflow==1.0  # via nomad-distribution (pyproject.toml)
+nomad-normalizer-plugin-soap==1.0  # via nomad-distribution (pyproject.toml)
+nomad-normalizer-plugin-spectra==1.0  # via nomad-distribution (pyproject.toml)
+nomad-normalizer-plugin-system==1.0  # via nomad-distribution (pyproject.toml)
 nomad-openbis==1.0.0      # via nomad-lab
+nomad-parser-plugins-atomistic==1.0  # via nomad-distribution (pyproject.toml)
+nomad-parser-plugins-database==1.0  # via nomad-distribution (pyproject.toml)
+nomad-parser-plugins-electronic==1.0  # via nomad-distribution (pyproject.toml)
+nomad-parser-plugins-simulation==1.0.2  # via nomad-parser-plugins-atomistic, nomad-parser-plugins-electronic
+nomad-parser-plugins-workflow==1.0  # via nomad-distribution (pyproject.toml)
 nomad-porous-materials @ git+https://github.com/FAIRmat-NFDI/nomad-porous-materials.git@522f4a3208077f534f1c5e886527ee2104283d0b  # via nomad-distribution (pyproject.toml)
-nomad-schema-plugin-run @ git+https://github.com/nomad-coe/nomad-schema-plugin-run.git@439a61c8edf01606af6d56dfe22e99d37eced127  # via atomisticparsers, databaseparsers, electronicparsers, nomad-schema-plugin-simulation-workflow, simulationparsers, workflowparsers, nomad-distribution (pyproject.toml)
-nomad-schema-plugin-simulation-workflow @ git+https://github.com/nomad-coe/nomad-schema-plugin-simulation-workflow.git@cfc98d52fd814200beaed75abb6c01de9c0bada5  # via atomisticparsers, databaseparsers, electronicparsers, nomad-normalizer-plugin-simulation-workflow, workflowparsers, nomad-distribution (pyproject.toml)
+nomad-schema-plugin-run==1.0.1  # via nomad-parser-plugins-atomistic, nomad-parser-plugins-database, nomad-parser-plugins-electronic, nomad-parser-plugins-simulation, nomad-parser-plugins-workflow, nomad-schema-plugin-simulation-workflow, nomad-distribution (pyproject.toml)
+nomad-schema-plugin-simulation-workflow==1.0.1  # via nomad-normalizer-plugin-simulation-workflow, nomad-parser-plugins-atomistic, nomad-parser-plugins-database, nomad-parser-plugins-electronic, nomad-parser-plugins-workflow, nomad-distribution (pyproject.toml)
 nomad-simulations==0.0.1  # via nomad-distribution (pyproject.toml)
 notebook==7.1.3           # via jupyter
 notebook-shim==0.2.4      # via jupyterlab, notebook
@@ -198,7 +200,7 @@ nptyping==1.4.4           # via nomad-lab
 numba==0.60.0             # via diffsims, hyperspy, kikuchipy, orix, pyxem, sparse
 numcodecs==0.13.0 ; platform_machine == 'AMD64' or platform_machine == 'x86_64'  # via zarr
 numexpr==2.10.1           # via blosc2, hyperspy, pyfai, pyxem, tables
-numpy==1.26.4             # via ase, blosc2, cftime, contourpy, dask, diffsims, fabio, findiff, griddataformats, h5grove, h5py, hyperspy, ifes-apt-tc-data-modeling, igor2, imageio, kikuchipy, lmfit, matid, matplotlib, mdanalysis, mrcfile, netcdf4, niondata, nionswift, nionswift-io, nionui, nomad-dos-fingerprints, nomad-lab, nptyping, numba, numcodecs, numexpr, numpy-quaternion, orix, pandas, phonopy, pycifrw, pyedr, pyfai, pymatgen, pynxtools, pynxtools-xps, pyxem, radioactivedecay, rdkit, rosettasciio, scikit-image, scikit-learn, scipy, silx, sparse, spglib, tables, tifffile, transforms3d, xarray, xraydb, zarr
+numpy==1.26.4             # via ase, blosc2, cftime, contourpy, dask, diffsims, fabio, findiff, griddataformats, h5grove, h5py, hyperspy, ifes-apt-tc-data-modeling, igor2, imageio, kikuchipy, lmfit, matid, matplotlib, mdanalysis, mrcfile, netcdf4, niondata, nionswift, nionswift-io, nionui, nomad-lab, nptyping, numba, numcodecs, numexpr, numpy-quaternion, orix, pandas, phonopy, pycifrw, pyedr, pyfai, pymatgen, pynxtools, pynxtools-xps, pyxem, radioactivedecay, rdkit, rosettasciio, scikit-image, scikit-learn, scipy, silx, sparse, spglib, tables, tifffile, transforms3d, xarray, xraydb, zarr
 numpy-quaternion==2023.0.4  # via orix
 oauthenticator==15.1.0    # via nomad-lab
 oauthlib==3.2.2           # via jupyterhub
@@ -211,13 +213,13 @@ palettable==3.3.3         # via pymatgen
 pamela==1.2.0 ; sys_platform != 'win32'  # via jupyterhub
 pandas==2.2.2             # via eelsdbconverter, ifes-apt-tc-data-modeling, nomad-lab, nomad-openbis, panedr, pymatgen, pynxtools, radioactivedecay, xarray
 pandocfilters==1.5.1      # via nbconvert
-panedr==0.8.0             # via atomisticparsers, nomad-lab
+panedr==0.8.0             # via nomad-lab, nomad-parser-plugins-atomistic
 parmed==4.2.2             # via nomad-lab
 parso==0.8.4              # via jedi
 partd==1.4.2              # via dask
 perovskite-solar-cell-database @ git+https://github.com/FAIRmat-NFDI/nomad-perovskite-solar-cells-database.git@f394d21abafeb659729af0c94e5f90949fce01c1  # via nomad-distribution (pyproject.toml)
 pexpect==4.9.0 ; sys_platform != 'win32'  # via ipython
-phonopy==2.11.0           # via asr, workflowparsers
+phonopy==2.11.0           # via asr, nomad-parser-plugins-workflow
 pillow==10.4.0            # via fabio, imageio, matplotlib, nionswift, rdkit, scikit-image
 pint==0.17                # via hyperspy, nomad-lab, pynxtools-xps, rosettasciio
 platformdirs==4.2.2       # via jupyter-core, pooch, xraydb
@@ -236,7 +238,7 @@ pyasn1-modules==0.4.0     # via rfc3161ng
 pybtex==0.24.0            # via pymatgen
 pycifrw==4.4.6            # via diffpy-structure
 pycparser==2.22           # via cffi
-pydantic==1.10.17         # via atomisticparsers, databaseparsers, electronicparsers, fastapi, nomad-lab, nomad-porous-materials, optimade, workflowparsers
+pydantic==1.10.17         # via fastapi, nomad-lab, nomad-parser-plugins-atomistic, nomad-parser-plugins-database, nomad-parser-plugins-electronic, nomad-parser-plugins-workflow, nomad-porous-materials, optimade
 pyedr==0.8.0              # via panedr
 pyfai==2024.5.0           # via pyxem
 pygments==2.18.0          # via ipython, jupyter-console, nbconvert, qtconsole, sphinx
@@ -268,7 +270,7 @@ pytz==2024.1              # via nionswift, nomad-lab, pandas
 pywin32==306 ; sys_platform == 'win32'  # via docker, jupyter-core
 pywinpty==2.0.13 ; os_name == 'nt'  # via jupyter-server, jupyter-server-terminals, terminado
 pyxem==0.16.0             # via pynxtools-em
-pyyaml==6.0.2             # via dask, electronicparsers, hyperspy, jupyter-events, kikuchipy, nomad-lab, phonopy, pybtex, pynxtools, pynxtools-mpes, rosettasciio, uvicorn
+pyyaml==6.0.2             # via dask, hyperspy, jupyter-events, kikuchipy, nomad-lab, nomad-parser-plugins-electronic, phonopy, pybtex, pynxtools, pynxtools-mpes, rosettasciio, uvicorn
 pyzeo==0.1.6              # via nomad-porous-materials
 pyzmq==26.1.0             # via ipykernel, ipyparallel, jupyter-client, jupyter-console, jupyter-server, qtconsole
 qtconsole==5.5.2          # via jupyter
@@ -289,12 +291,11 @@ ruamel-yaml-clib==0.2.8 ; python_full_version < '3.13' and platform_python_imple
 runstats==2.0.0           # via nomad-lab
 scikit-image==0.22.0      # via hyperspy, kikuchipy, pyxem
 scikit-learn==1.5.1       # via kikuchipy, matid, nomad-lab, pyxem
-scipy==1.14.0             # via ase, atomisticparsers, diffsims, findiff, griddataformats, hyperspy, kikuchipy, lmfit, mdanalysis, niondata, nionswift, nomad-lab, nomad-schema-plugin-simulation-workflow, orix, pyfai, pymatgen, pyxem, radioactivedecay, scikit-image, scikit-learn, sparse, xraydb
+scipy==1.14.0             # via ase, diffsims, findiff, griddataformats, hyperspy, kikuchipy, lmfit, mdanalysis, niondata, nionswift, nomad-lab, nomad-parser-plugins-atomistic, nomad-schema-plugin-simulation-workflow, orix, pyfai, pymatgen, pyxem, radioactivedecay, scikit-image, scikit-learn, sparse, xraydb
 send2trash==1.8.3         # via jupyter-server
 sentinels==1.0.0          # via mongomock
 setuptools==72.1.0        # via pynxtools-xps, radioactivedecay
 silx==2.1.0               # via pyfai
-simulationparsers @ git+https://github.com/nomad-coe/simulation-parsers.git@bf69fd31e16e6aa21bd819db68e905f986ebb3c7  # via atomisticparsers, electronicparsers
 six==1.16.0               # via anytree, asttokens, basicauth, bleach, diffpy-structure, elasticsearch-dsl, html5lib, isodate, pybtex, python-dateutil, rdflib, rfc3339-validator, validators
 smmap==5.0.1              # via gitdb
 sniffio==1.3.1            # via anyio, httpx
@@ -350,9 +351,8 @@ websocket-client==1.8.0   # via jupyter-server
 websockets==12.0          # via uvicorn
 werkzeug==3.0.4           # via flask
 widgetsnbextension==4.0.11  # via ipywidgets
-workflowparsers @ git+https://github.com/nomad-coe/workflow-parsers.git@d903cf5f93a7ad2edcc2f6071246c50d498dd50e  # via nomad-distribution (pyproject.toml)
 wrapt==1.16.0             # via nomad-lab
-xarray==2024.3.0          # via nomad-lab, pynxtools, pynxtools-mpes, pynxtools-xps, workflowparsers
+xarray==2024.3.0          # via nomad-lab, nomad-parser-plugins-workflow, pynxtools, pynxtools-mpes, pynxtools-xps
 xmltodict==0.13.0         # via ifes-apt-tc-data-modeling, pynxtools-em
 xraydb==4.5.4             # via pynxtools-em
 zarr==2.18.2 ; platform_machine == 'AMD64' or platform_machine == 'x86_64'  # via hyperspy
